@@ -101,8 +101,8 @@ const services = [
   },
   {
     icon: TreePine,
-    title: "Copper & Custom Gutters",
-    desc: "Half-round copper, oversized 6\" & 7\" K-style, and specialty profiles for luxury homes and historic properties.",
+    title: "Fence Installation & Repair",
+    desc: "Wood, aluminum, and vinyl fencing — installed and repaired with the same craftsman-level precision as our gutter work.",
   },
 ];
 
