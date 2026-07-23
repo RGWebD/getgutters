@@ -101,8 +101,8 @@ const services = [
   },
   {
     icon: TreePine,
-    title: "Copper & Custom Gutters",
-    desc: "Half-round copper, oversized 6\" & 7\" K-style, and specialty profiles for luxury homes and historic properties.",
+    title: "Fence Installation & Repair",
+    desc: "Wood, aluminum, and vinyl fencing — installed and repaired with the same craftsman-level precision as our gutter work.",
   },
 ];
 
@@ -181,6 +181,12 @@ function Index() {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
+        />
+        <img
+          src={work1.url}
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:py-32">
@@ -294,8 +300,8 @@ function Index() {
             </p>
             <ul className="mt-6 space-y-3">
               {[
-                "Custom-milled seamless aluminum in 5\", 6\", and 7\" K-style",
-                "Half-round & copper options for luxury properties",
+                "Custom-milled seamless aluminum 6\" K-style gutters",
+                "Wood, aluminum & vinyl fence installation and repair",
                 "Hidden hangers with stainless steel screws — no nails",
                 "Licensed, insured, and background-checked crew",
                 "Written workmanship warranty on every install",
@@ -353,13 +359,13 @@ function Index() {
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
+              { img: work1, label: "Oversized downspouts · entryway" },
               { img: work3, label: "Seamless white K-style · corner miter" },
               { img: work5, label: "Full perimeter install · modern stucco" },
               { img: work6, label: "Custom downspout routing · patio side" },
               { img: work8, label: "Matte black gutters · coastal home" },
               { img: work4, label: "Bronze fascia detail · new construction" },
               { img: work7, label: "Black seamless · brick estate" },
-              { img: work1, label: "Oversized downspouts · entryway" },
               { img: work2, label: "Wrap-around seamless · rear elevation" },
               { img: fasciaInstall, label: "Fascia rebuild · precision fit" },
             ].map((item, i) => (
@@ -475,11 +481,12 @@ function Index() {
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-primary">Services</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li>Seamless Gutter Installation</li>
+              <li>Seamless 6" K-Style Installation</li>
               <li>Gutter Cleaning</li>
               <li>Gutter Guards</li>
               <li>Gutter Repair</li>
               <li>Fascia & Soffit</li>
+              <li>Fence Installation & Repair</li>
               <li>Commercial Gutters</li>
             </ul>
           </div>
