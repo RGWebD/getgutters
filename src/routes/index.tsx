@@ -475,11 +475,12 @@ function Index() {
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-primary">Services</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li>Seamless Gutter Installation</li>
+              <li>Seamless 6" K-Style Installation</li>
               <li>Gutter Cleaning</li>
               <li>Gutter Guards</li>
               <li>Gutter Repair</li>
               <li>Fascia & Soffit</li>
+              <li>Fence Installation & Repair</li>
               <li>Commercial Gutters</li>
             </ul>
           </div>
