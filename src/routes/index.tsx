@@ -463,16 +463,18 @@ function Index() {
           aria-label="Powered by RGWebD"
         >
           <div className="flex animate-marquee whitespace-nowrap">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="mx-8 flex items-center gap-3 text-sm">
-                <img src={rgwebdLogo.url} alt="RGWebD" className="h-7 w-auto rounded" />
-                <span className="text-muted-foreground">Powered by</span>
-                <span className="text-gold-gradient font-semibold tracking-wide">
-                  RGWebD — Reese Gets You Ranked
-                </span>
-                <span className="text-primary">✦</span>
-              </div>
-            ))}
+            {Array.from({ length: 2 }).flatMap((_, group) =>
+              Array.from({ length: 6 }).map((_, i) => (
+                <div key={`${group}-${i}`} className="mx-8 flex items-center gap-3 text-sm">
+                  <img src={rgwebdLogo.url} alt="RGWebD" className="h-7 w-auto rounded" />
+                  <span className="text-muted-foreground">Powered by</span>
+                  <span className="text-gold-gradient font-semibold tracking-wide">
+                    RGWebD — Reese Gets You Ranked
+                  </span>
+                  <span className="text-primary">✦</span>
+                </div>
+              )),
+            )}
           </div>
         </a>
       </footer>
