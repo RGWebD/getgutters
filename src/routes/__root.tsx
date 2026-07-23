@@ -77,21 +77,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Get Gutters | Seamless Gutter Installation Jacksonville & Orange Park FL" },
+      {
+        name: "description",
+        content:
+          "Get Gutters delivers luxury-grade seamless gutter installation, repair, cleaning, and gutter guard services across Jacksonville, Orange Park, Ponte Vedra, Nocatee & St. Augustine. Free estimates — call (904) 589-0000.",
+      },
+      { name: "author", content: "Get Gutters" },
+      { property: "og:title", content: "Get Gutters | Master Craftsmen. Seamless Excellence." },
+      {
+        property: "og:description",
+        content:
+          "Premium seamless gutter installation, repair & cleaning throughout Northeast Florida. Family-owned. 5-star rated. Free estimates.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,
