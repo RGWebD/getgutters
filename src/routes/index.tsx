@@ -5,6 +5,15 @@ import truckGate from "@/assets/truck-gate.jpeg.asset.json";
 import gutterMachine from "@/assets/gutter-machine.jpeg.asset.json";
 import fasciaInstall from "@/assets/fascia-install.jpeg.asset.json";
 import rgwebdLogo from "@/assets/rgwebd-logo.jpeg.asset.json";
+import heroTruck from "@/assets/hero-truck.jpeg.asset.json";
+import work1 from "@/assets/work-1.jpeg.asset.json";
+import work2 from "@/assets/work-2.jpeg.asset.json";
+import work3 from "@/assets/work-3.jpeg.asset.json";
+import work4 from "@/assets/work-4.jpeg.asset.json";
+import work5 from "@/assets/work-5.jpeg.asset.json";
+import work6 from "@/assets/work-6.jpeg.asset.json";
+import work7 from "@/assets/work-7.jpeg.asset.json";
+import work8 from "@/assets/work-8.jpeg.asset.json";
 import {
   Phone,
   MapPin,
