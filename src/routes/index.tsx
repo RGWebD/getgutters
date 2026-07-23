@@ -353,13 +353,13 @@ function Index() {
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
+              { img: work1, label: "Oversized downspouts · entryway" },
               { img: work3, label: "Seamless white K-style · corner miter" },
               { img: work5, label: "Full perimeter install · modern stucco" },
               { img: work6, label: "Custom downspout routing · patio side" },
               { img: work8, label: "Matte black gutters · coastal home" },
               { img: work4, label: "Bronze fascia detail · new construction" },
               { img: work7, label: "Black seamless · brick estate" },
-              { img: work1, label: "Oversized downspouts · entryway" },
               { img: work2, label: "Wrap-around seamless · rear elevation" },
               { img: fasciaInstall, label: "Fascia rebuild · precision fit" },
             ].map((item, i) => (
