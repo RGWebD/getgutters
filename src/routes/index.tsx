@@ -5,6 +5,15 @@ import truckGate from "@/assets/truck-gate.jpeg.asset.json";
 import gutterMachine from "@/assets/gutter-machine.jpeg.asset.json";
 import fasciaInstall from "@/assets/fascia-install.jpeg.asset.json";
 import rgwebdLogo from "@/assets/rgwebd-logo.jpeg.asset.json";
+import heroTruck from "@/assets/hero-truck.jpeg.asset.json";
+import work1 from "@/assets/work-1.jpeg.asset.json";
+import work2 from "@/assets/work-2.jpeg.asset.json";
+import work3 from "@/assets/work-3.jpeg.asset.json";
+import work4 from "@/assets/work-4.jpeg.asset.json";
+import work5 from "@/assets/work-5.jpeg.asset.json";
+import work6 from "@/assets/work-6.jpeg.asset.json";
+import work7 from "@/assets/work-7.jpeg.asset.json";
+import work8 from "@/assets/work-8.jpeg.asset.json";
 import {
   Phone,
   MapPin,
@@ -166,14 +175,14 @@ function Index() {
       {/* HERO */}
       <section id="top" className="relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-40"
           style={{
-            backgroundImage: `url(${truckTrailer.url})`,
+            backgroundImage: `url(${heroTruck.url})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:py-32">
           <div className="flex flex-col justify-center">
             <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-primary">
@@ -333,15 +342,49 @@ function Index() {
       <section id="gallery" className="border-t border-border/60 bg-card/40 py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <div className="text-xs uppercase tracking-[0.3em] text-primary">The Fleet & The Craft</div>
+            <div className="text-xs uppercase tracking-[0.3em] text-primary">Our Work</div>
             <h2 className="mt-3 font-display text-4xl font-bold sm:text-5xl">
-              Built for <span className="text-gold-gradient">excellence.</span>
+              Craftsmanship you can <span className="text-gold-gradient">see.</span>
             </h2>
+            <p className="mt-4 text-muted-foreground">
+              Real installs across Northeast Florida — seamless K-style runs, custom
+              downspouts, precision miters, and clean fascia lines on every project.
+            </p>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[truckTrailer, truckGate, gutterMachine, fasciaInstall].map((img, i) => (
-              <div key={i} className="group overflow-hidden rounded-2xl border border-border shadow-luxe">
-                <img src={img.url} alt={`Get Gutters work ${i + 1}`} className="h-80 w-full object-cover transition duration-500 group-hover:scale-105" />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { img: work3, label: "Seamless white K-style · corner miter" },
+              { img: work5, label: "Full perimeter install · modern stucco" },
+              { img: work6, label: "Custom downspout routing · patio side" },
+              { img: work8, label: "Matte black gutters · coastal home" },
+              { img: work4, label: "Bronze fascia detail · new construction" },
+              { img: work7, label: "Black seamless · brick estate" },
+              { img: work1, label: "Oversized downspouts · entryway" },
+              { img: work2, label: "Wrap-around seamless · rear elevation" },
+              { img: fasciaInstall, label: "Fascia rebuild · precision fit" },
+            ].map((item, i) => (
+              <figure
+                key={i}
+                className="group overflow-hidden rounded-2xl border border-border shadow-luxe transition hover:border-primary/60 hover:shadow-gold"
+              >
+                <div className="aspect-[4/5] overflow-hidden">
+                  <img
+                    src={item.img.url}
+                    alt={item.label}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption className="border-t border-border/60 bg-background/70 px-4 py-3 text-xs uppercase tracking-wider text-muted-foreground">
+                  {item.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {[truckTrailer, truckGate, gutterMachine].map((img, i) => (
+              <div key={i} className="group overflow-hidden rounded-2xl border border-primary/30 shadow-luxe">
+                <img src={img.url} alt={`Get Gutters fleet ${i + 1}`} className="h-64 w-full object-cover transition duration-500 group-hover:scale-105" />
               </div>
             ))}
           </div>
