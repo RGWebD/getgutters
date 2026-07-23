@@ -77,21 +77,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Get Gutters | Seamless Gutter Installation Jacksonville & Orange Park FL" },
+      { title: "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL" },
       {
         name: "description",
         content:
-          "Get Gutters delivers luxury-grade seamless gutter installation, repair, cleaning, and gutter guard services across Jacksonville, Orange Park, Ponte Vedra, Nocatee & St. Augustine. Free estimates — call (904) 589-0000.",
+          "Family-owned seamless gutter experts serving Jacksonville, Orange Park, Ponte Vedra, Nocatee, St. Augustine & 20+ Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
       },
       { name: "author", content: "Get Gutters" },
-      { property: "og:title", content: "Get Gutters | Master Craftsmen. Seamless Excellence." },
+      { property: "og:title", content: "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL" },
       {
         property: "og:description",
         content:
-          "Premium seamless gutter installation, repair & cleaning throughout Northeast Florida. Family-owned. 5-star rated. Free estimates.",
+          "Family-owned seamless gutter experts serving Jacksonville, Orange Park, Ponte Vedra, Nocatee, St. Augustine & 20+ Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL" },
+      { name: "twitter:description", content: "Family-owned seamless gutter experts serving Jacksonville, Orange Park, Ponte Vedra, Nocatee, St. Augustine & 20+ Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/62239d74-ab12-4c2e-ba30-9af8311b1c67/id-preview-1313515f--850abd2c-4bae-40a4-adb6-a08055fc1945.lovable.app-1784845106591.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/62239d74-ab12-4c2e-ba30-9af8311b1c67/id-preview-1313515f--850abd2c-4bae-40a4-adb6-a08055fc1945.lovable.app-1784845106591.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

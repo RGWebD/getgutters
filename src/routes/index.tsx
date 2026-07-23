@@ -39,12 +39,12 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Get Gutters — Master Craftsmen. Seamless Excellence.",
+        content: "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL",
       },
       {
         property: "og:description",
         content:
-          "Luxury-grade seamless gutter installation, repair, cleaning, guards & fascia work throughout Northeast Florida.",
+          "Family-owned seamless gutter experts serving Jacksonville, Orange Park, Ponte Vedra, Nocatee, St. Augustine & 20+ Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
       },
     ],
   }),
