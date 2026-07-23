@@ -294,8 +294,8 @@ function Index() {
             </p>
             <ul className="mt-6 space-y-3">
               {[
-                "Custom-milled seamless aluminum in 5\", 6\", and 7\" K-style",
-                "Half-round & copper options for luxury properties",
+                "Custom-milled seamless aluminum 6\" K-style gutters",
+                "Wood, aluminum & vinyl fence installation and repair",
                 "Hidden hangers with stainless steel screws — no nails",
                 "Licensed, insured, and background-checked crew",
                 "Written workmanship warranty on every install",
