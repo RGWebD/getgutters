@@ -195,8 +195,8 @@ function Index() {
               <Star className="h-3 w-3 fill-primary" /> 5.0 · 85+ Google Reviews
             </div>
             <h1 className="font-display text-5xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
-              Seamless Gutters.{" "}
-              <span className="text-gold-gradient">Flawless Craft.</span>
+              Flawless Craftsmanship.{" "}
+              <span className="text-gold-gradient">Professional Results.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
               Family-owned. Master-installed. Get Gutters protects Northeast
