@@ -109,7 +109,7 @@ const services = [
 const serviceAreas = [
   "Orange Park",
   "Jacksonville",
-  "Ponte Vedra Beach",
+  "Ponte Vedra",
   "Nocatee",
   "St. Augustine",
   "Fleming Island",
@@ -122,19 +122,12 @@ const serviceAreas = [
   "Julington Creek",
   "Fruit Cove",
   "Jacksonville Beach",
-  "Neptune Beach",
-  "Atlantic Beach",
   "Queen's Harbour",
   "Deerwood",
   "Sawgrass",
-  "World Golf Village",
-  "Palm Valley",
-  "Vilano Beach",
   "Green Cove Springs",
   "St. Johns",
   "Bartram Park",
-  "Amelia Island",
-  "Fernandina Beach",
 ];
 
 function Index() {
