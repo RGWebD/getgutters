@@ -103,8 +103,9 @@ const services = [
   {
     icon: TreePine,
     title: "Fence Installation & Repair",
-    desc: "Wood, aluminum, and vinyl fencing — installed and repaired with the same craftsman-level precision as our gutter work.",
+    desc: "Wood and vinyl fencing — installed and repaired with the same craftsman-level precision as our gutter work.",
   },
+
 ];
 
 const serviceAreas = [
@@ -301,8 +302,9 @@ function Index() {
             <ul className="mt-6 space-y-3">
               {[
                 "Custom-milled seamless aluminum 6\" K-style gutters",
-                "Wood, aluminum & vinyl fence installation and repair",
+                "Wood & vinyl fence installation and repair",
                 "Hidden hangers with stainless steel screws — no nails",
+
                 "Licensed, insured, and background-checked crew",
                 "Written workmanship warranty on every install",
                 "Clean job site — every scrap removed, every time",
