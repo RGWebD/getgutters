@@ -411,18 +411,20 @@ function Index() {
                   Call Pablo today for a no-pressure walkthrough and a free
                   written estimate. Most estimates scheduled within 24 hours.
                 </p>
-                <a
-                  href={`tel:${PHONE_TEL}`}
-                  className="mt-8 inline-flex items-center gap-3 rounded-full bg-gold-gradient px-8 py-4 text-lg font-semibold text-primary-foreground shadow-gold transition hover:brightness-110"
-                >
-                  <Phone className="h-5 w-5" /> {PHONE}
-                </a>
-                <a
-                  href={`sms:${PHONE_TEL}`}
-                  className="mt-4 inline-flex items-center gap-2 rounded-full border border-primary/50 px-7 py-3 font-semibold text-primary transition hover:bg-primary/10"
-                >
-                  <MessageSquare className="h-4 w-4" /> Text {PHONE}
-                </a>
+                <div className="mt-8 flex flex-col items-start gap-3">
+                  <a
+                    href={`tel:${PHONE_TEL}`}
+                    className="inline-flex items-center gap-3 rounded-full bg-gold-gradient px-8 py-4 text-lg font-semibold text-primary-foreground shadow-gold transition hover:brightness-110"
+                  >
+                    <Phone className="h-5 w-5" /> {PHONE}
+                  </a>
+                  <a
+                    href={`sms:${PHONE_TEL}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-primary/50 px-7 py-3 font-semibold text-primary transition hover:bg-primary/10"
+                  >
+                    <MessageSquare className="h-4 w-4" /> Text {PHONE}
+                  </a>
+                </div>
               </div>
               <div className="space-y-4 text-sm">
                 <div className="flex items-start gap-3 rounded-xl border border-border bg-background/50 p-4">
