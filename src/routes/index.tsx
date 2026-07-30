@@ -417,6 +417,12 @@ function Index() {
                 >
                   <Phone className="h-5 w-5" /> {PHONE}
                 </a>
+                <a
+                  href={`sms:${PHONE_TEL}`}
+                  className="mt-4 inline-flex items-center gap-2 rounded-full border border-primary/50 px-7 py-3 font-semibold text-primary transition hover:bg-primary/10"
+                >
+                  <MessageSquare className="h-4 w-4" /> Text {PHONE}
+                </a>
               </div>
               <div className="space-y-4 text-sm">
                 <div className="flex items-start gap-3 rounded-xl border border-border bg-background/50 p-4">
