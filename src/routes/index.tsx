@@ -32,6 +32,7 @@ import {
   Award,
   Instagram,
   Facebook,
+  MessageSquare,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
