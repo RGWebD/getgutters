@@ -9,9 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DatabaseRouteImport } from './routes/database'
+import { Route as EstimateRouteImport } from './routes/estimate'
 import { Route as EstimatorRouteImport } from './routes/estimator'
 import { Route as IndexRouteImport } from './routes/index'
 
+const DatabaseRoute = DatabaseRouteImport.update({
+  id: '/database',
+  path: '/database',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstimateRoute = EstimateRouteImport.update({
+  id: '/estimate',
+  path: '/estimate',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EstimatorRoute = EstimatorRouteImport.update({
   id: '/estimator',
   path: '/estimator',
@@ -25,32 +37,54 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/database': typeof DatabaseRoute
+  '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/database': typeof DatabaseRoute
+  '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/database': typeof DatabaseRoute
+  '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/estimator'
+  fullPaths: '/' | '/database' | '/estimate' | '/estimator'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/estimator'
-  id: '__root__' | '/' | '/estimator'
+  to: '/' | '/database' | '/estimate' | '/estimator'
+  id: '__root__' | '/' | '/database' | '/estimate' | '/estimator'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DatabaseRoute: typeof DatabaseRoute
+  EstimateRoute: typeof EstimateRoute
   EstimatorRoute: typeof EstimatorRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/database': {
+      id: '/database'
+      path: '/database'
+      fullPath: '/database'
+      preLoaderRoute: typeof DatabaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estimate': {
+      id: '/estimate'
+      path: '/estimate'
+      fullPath: '/estimate'
+      preLoaderRoute: typeof EstimateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/estimator': {
       id: '/estimator'
       path: '/estimator'
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DatabaseRoute: DatabaseRoute,
+  EstimateRoute: EstimateRoute,
   EstimatorRoute: EstimatorRoute,
 }
 export const routeTree = rootRouteImport
