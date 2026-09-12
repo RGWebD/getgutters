@@ -9,14 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as DatabaseRouteImport } from './routes/database'
-import { Route as EstimateRouteImport } from './routes/estimate'
 import { Route as EstimatorRouteImport } from './routes/estimator'
+import { Route as EstimateRouteImport } from './routes/estimate'
+import { Route as DatabaseRouteImport } from './routes/database'
 import { Route as IndexRouteImport } from './routes/index'
 
-const DatabaseRoute = DatabaseRouteImport.update({
-  id: '/database',
-  path: '/database',
+const EstimatorRoute = EstimatorRouteImport.update({
+  id: '/estimator',
+  path: '/estimator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EstimateRoute = EstimateRouteImport.update({
@@ -24,9 +24,9 @@ const EstimateRoute = EstimateRouteImport.update({
   path: '/estimate',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EstimatorRoute = EstimatorRouteImport.update({
-  id: '/estimator',
-  path: '/estimator',
+const DatabaseRoute = DatabaseRouteImport.update({
+  id: '/database',
+  path: '/database',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -71,11 +71,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/database': {
-      id: '/database'
-      path: '/database'
-      fullPath: '/database'
-      preLoaderRoute: typeof DatabaseRouteImport
+    '/estimator': {
+      id: '/estimator'
+      path: '/estimator'
+      fullPath: '/estimator'
+      preLoaderRoute: typeof EstimatorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/estimate': {
@@ -85,11 +85,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EstimateRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/estimator': {
-      id: '/estimator'
-      path: '/estimator'
-      fullPath: '/estimator'
-      preLoaderRoute: typeof EstimatorRouteImport
+    '/database': {
+      id: '/database'
+      path: '/database'
+      fullPath: '/database'
+      preLoaderRoute: typeof DatabaseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
