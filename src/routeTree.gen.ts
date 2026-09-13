@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as EstimatorRouteImport } from './routes/estimator'
 import { Route as EstimateRouteImport } from './routes/estimate'
 import { Route as DatabaseRouteImport } from './routes/database'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 
 const EstimatorRoute = EstimatorRouteImport.update({
@@ -29,6 +30,11 @@ const DatabaseRoute = DatabaseRouteImport.update({
   path: '/database',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/database': typeof DatabaseRoute
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/database': typeof DatabaseRoute
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/database': typeof DatabaseRoute
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/database' | '/estimate' | '/estimator'
+  fullPaths: '/' | '/admin' | '/database' | '/estimate' | '/estimator'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/database' | '/estimate' | '/estimator'
-  id: '__root__' | '/' | '/database' | '/estimate' | '/estimator'
+  to: '/' | '/admin' | '/database' | '/estimate' | '/estimator'
+  id: '__root__' | '/' | '/admin' | '/database' | '/estimate' | '/estimator'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   DatabaseRoute: typeof DatabaseRoute
   EstimateRoute: typeof EstimateRoute
   EstimatorRoute: typeof EstimatorRoute
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DatabaseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   DatabaseRoute: DatabaseRoute,
   EstimateRoute: EstimateRoute,
   EstimatorRoute: EstimatorRoute,
