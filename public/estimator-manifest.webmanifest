@@ -1,0 +1,17 @@
+{
+  "name": "Get Gutters Estimator",
+  "short_name": "GG Estimator",
+  "description": "Private estimating and customer database tool for Get Gutters.",
+  "start_url": "/estimate",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070707",
+  "theme_color": "#d6a632",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Get Gutters Estimator</title>
   <meta name="description" content="Mobile-first gutter estimator for Get Gutters in Orange Park and Jacksonville." />
+  <meta name="theme-color" content="#070707" />
+  <link rel="manifest" href="/estimator-manifest.webmanifest" />
   <link rel="stylesheet" href="/estimator-app.css" />
 </head>
 <body>
@@ -39,7 +41,32 @@
           <label>Phone <input id="customerPhone" autocomplete="tel" inputmode="tel" /></label>
           <label class="wide">Address <input id="customerAddress" autocomplete="street-address" /></label>
           <label>Email <input id="customerEmail" autocomplete="email" inputmode="email" /></label>
-          <label>Job Date <input id="jobDate" type="date" /></label>
+          <label>Estimate Date <input id="jobDate" type="date" /></label>
+          <label>Job Type
+            <select id="projectType">
+              <option>Gutter</option>
+              <option>Soffit</option>
+              <option>Fascia</option>
+              <option>Soffit &amp; Fascia</option>
+              <option>Porch Ceiling</option>
+            </select>
+          </label>
+          <label>Gutter Color
+            <select id="gutterColor">
+              <option>White</option>
+              <option>Black</option>
+              <option>Bronze</option>
+              <option>Clay</option>
+              <option>Almond</option>
+              <option>Musket Brown</option>
+              <option>Custom</option>
+            </select>
+          </label>
+          <div class="quick-actions">
+            <a id="callCustomerBtn" class="action-link" href="#">Call</a>
+            <a id="textCustomerBtn" class="action-link" href="#">Text</a>
+            <a id="mapCustomerBtn" class="action-link" href="#">Maps</a>
+          </div>
         </div>
       </section>
 
@@ -48,7 +75,7 @@
           <div class="draw-header">
             <div>
               <div class="section-title compact"><span>ROOFLINE DRAWING</span></div>
-              <p class="helper">Tap and drag to draw straight runs. Hold Shift for free angle. Tap marker tools to place items.</p>
+              <p class="helper">Tap and drag to draw runs. Pick a color/story, angle snap, offset size, arrows, or typed elbow notes before placing tools.</p>
             </div>
             <div class="total-pill">
               <span>Total LF</span>
@@ -56,15 +83,61 @@
             </div>
           </div>
 
+          <div class="draw-settings">
+            <label>Drawing Color
+              <select id="lineLayer">
+                <option value="firstStory">1st Story · Blue</option>
+                <option value="secondStory">2nd Story · Gold</option>
+                <option value="existing">Existing · Green</option>
+                <option value="optionA">Option A · Purple</option>
+                <option value="optionB">Option B · Red</option>
+              </select>
+            </label>
+            <label>Angle Snap
+              <select id="angleSnap">
+                <option value="45">Straight + 45°</option>
+                <option value="22.5">22.5° increments</option>
+                <option value="90">Straight only</option>
+                <option value="free">Free angle</option>
+              </select>
+            </label>
+            <label>Offset Size
+              <select id="offsetSize">
+                <option value="2">2&quot;</option>
+                <option value="4">4&quot;</option>
+                <option value="6">6&quot;</option>
+              </select>
+            </label>
+            <label>Arrow Direction
+              <select id="arrowDirection">
+                <option value="E">→ East</option>
+                <option value="SE">↘ Southeast</option>
+                <option value="S">↓ South</option>
+                <option value="SW">↙ Southwest</option>
+                <option value="W">← West</option>
+                <option value="NW">↖ Northwest</option>
+                <option value="N">↑ North</option>
+                <option value="NE">↗ Northeast</option>
+              </select>
+            </label>
+            <label class="wide">Elbow Note
+              <input id="elbowCode" placeholder="AAB, BBA, AB..." />
+            </label>
+          </div>
+
           <div class="tool-strip" aria-label="Drawing tools">
-            <button class="tool active" data-tool="gutter" type="button">Gutter</button>
-            <button class="tool" data-tool="downspout" type="button">Downspout</button>
+            <button class="tool active" data-tool="gutter" type="button">Run</button>
+            <button class="tool" data-tool="downspout" type="button">Downspout X</button>
+            <button class="tool" data-tool="downspoutArrow" type="button">DS Arrow</button>
             <button class="tool" data-tool="insideMiter" type="button">Inside Miter</button>
             <button class="tool" data-tool="outsideMiter" type="button">Outside Miter</button>
-            <button class="tool" data-tool="elbowA" type="button">A Elbow</button>
-            <button class="tool" data-tool="elbowB" type="button">B Elbow</button>
+            <button class="tool" data-tool="insideBayMiter" type="button">Inside Bay</button>
+            <button class="tool" data-tool="outsideBayMiter" type="button">Outside Bay</button>
+            <button class="tool" data-tool="elbowNote" type="button">Elbow Note</button>
             <button class="tool" data-tool="offset" type="button">Offset</button>
+            <button class="tool" data-tool="spoutSaver" type="button">Spout Saver</button>
             <button class="tool" data-tool="splashBlock" type="button">Splash Block</button>
+            <button class="tool" data-tool="flexGroundSpout" type="button">Flex Ground</button>
             <button class="tool" data-tool="endCap" type="button">End Cap</button>
             <button class="tool danger" data-tool="erase" type="button">Erase</button>
           </div>
@@ -108,6 +181,25 @@
             </label>
           </div>
 
+          <details class="manual-editor" open>
+            <summary>Manual materials</summary>
+            <div class="manual-grid">
+              <label>Run LF <input id="manualGutterLf" type="number" min="0" value="0" /></label>
+              <label>Downspout LF <input id="manualDownspoutLf" type="number" min="0" value="0" /></label>
+              <label>Inside Miters <input id="manualInsideMiter" type="number" min="0" value="0" /></label>
+              <label>Outside Miters <input id="manualOutsideMiter" type="number" min="0" value="0" /></label>
+              <label>Inside Bay <input id="manualInsideBayMiter" type="number" min="0" value="0" /></label>
+              <label>Outside Bay <input id="manualOutsideBayMiter" type="number" min="0" value="0" /></label>
+              <label>2&quot; Offsets <input id="manualOffset2" type="number" min="0" value="0" /></label>
+              <label>4&quot; Offsets <input id="manualOffset4" type="number" min="0" value="0" /></label>
+              <label>6&quot; Offsets <input id="manualOffset6" type="number" min="0" value="0" /></label>
+              <label>End Cap Sets <input id="manualEndCap" type="number" min="0" value="0" /></label>
+              <label>Spout Savers <input id="manualSpoutSaver" type="number" min="0" value="0" /></label>
+              <label>Splash Blocks <input id="manualSplashBlock" type="number" min="0" value="0" /></label>
+              <label>Flex Ground Spouts <input id="manualFlexGroundSpout" type="number" min="0" value="0" /></label>
+            </div>
+          </details>
+
           <div class="count-list" id="materialCounts"></div>
 
           <details class="pricing-editor" open>
@@ -118,7 +210,12 @@
           <div class="section-title extra-title"><span>EXTRA</span></div>
           <div class="extras">
             <label>Drip edge LF <input id="dripEdgeQty" type="number" min="0" value="0" /></label>
-            <label>Screens LF <input id="screensQty" type="number" min="0" value="0" /></label>
+            <label>Drip edge extension LF <input id="dripEdgeExtensionQty" type="number" min="0" value="0" /></label>
+            <label>Basic leaf guard LF <input id="basicLeafGuardQty" type="number" min="0" value="0" /></label>
+            <label>Premium leaf guard LF <input id="premiumLeafGuardQty" type="number" min="0" value="0" /></label>
+            <label>Soffit LF <input id="soffitLf" type="number" min="0" value="0" /></label>
+            <label>Fascia LF <input id="fasciaLf" type="number" min="0" value="0" /></label>
+            <label>Porch ceiling SQFT <input id="porchCeilingSqft" type="number" min="0" value="0" /></label>
             <label>Additions $ <input id="additionsCost" type="number" min="0" value="0" /></label>
           </div>
 

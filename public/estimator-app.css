@@ -208,6 +208,13 @@ label {
   grid-column: span 2;
 }
 
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+  align-self: end;
+}
+
 .primary-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 390px;
@@ -259,6 +266,13 @@ label {
   overflow-x: auto;
   padding: 0 0.85rem 0.85rem;
   scrollbar-color: var(--gold) transparent;
+}
+
+.draw-settings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.65rem;
+  padding: 0 0.85rem 0.85rem;
 }
 
 .tool {
@@ -339,6 +353,24 @@ canvas {
   grid-template-columns: 1fr 1fr;
   gap: 0.65rem;
   padding: 0.85rem;
+}
+
+.manual-editor {
+  padding: 0 0.85rem 0.85rem;
+  border-bottom: 1px solid rgba(214, 166, 50, 0.15);
+}
+
+.manual-editor summary {
+  cursor: pointer;
+  color: var(--gold-2);
+  font-weight: 900;
+  margin-bottom: 0.75rem;
+}
+
+.manual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
 }
 
 .count-list {
@@ -614,7 +646,7 @@ canvas {
     font-size: 0.72rem;
   }
 
-  .field-grid, .select-row, .extras, .price-grid {
+  .field-grid, .select-row, .extras, .price-grid, .draw-settings, .manual-grid {
     grid-template-columns: 1fr;
   }
 
