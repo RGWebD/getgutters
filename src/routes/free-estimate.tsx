@@ -60,7 +60,6 @@ const SERVICES = [
   "Gutter Guards",
   "Fascia & Soffit",
   "Downspouts & Drainage",
-  "Wood / Vinyl Fence Installation",
   "Other / Not Sure",
 ];
 
