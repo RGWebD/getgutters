@@ -99,8 +99,19 @@ function AdminPage() {
   return <Dashboard />;
 }
 
+type EstimateRequest = {
+  id: string;
+  name: string;
+  phone: string;
+  email: string | null;
+  service: string | null;
+  message: string;
+  created_at: string;
+};
+
 function Dashboard() {
   const [rows, setRows] = useState<Row[] | null>(null);
+  const [requests, setRequests] = useState<EstimateRequest[] | null>(null);
   const [days, setDays] = useState(30);
   const [metric, setMetric] = useState<MetricKey>("visitors");
 
@@ -115,6 +126,14 @@ function Dashboard() {
       .limit(10000)
       .then(({ data }) => {
         if (active) setRows((data as Row[]) ?? []);
+      });
+    supabase
+      .from("estimate_requests")
+      .select("id, name, phone, email, service, message, created_at")
+      .order("created_at", { ascending: false })
+      .limit(200)
+      .then(({ data }) => {
+        if (active) setRequests((data as EstimateRequest[]) ?? []);
       });
     return () => {
       active = false;
@@ -334,6 +353,52 @@ function Dashboard() {
                 <List items={stats.devices} total={stats.totals.pageviews} />
               </Panel>
             </div>
+
+            {/* Estimate requests */}
+            <Panel title={`Estimate Requests${requests ? ` (${requests.length})` : ""}`}>
+              {requests === null ? (
+                <p className="text-sm text-[#9aa6b8]">Loading…</p>
+              ) : requests.length === 0 ? (
+                <p className="text-sm text-[#9aa6b8]">
+                  No estimate requests yet — they'll appear here when someone
+                  fills out the form.
+                </p>
+              ) : (
+                <ul className="space-y-3">
+                  {requests.map((r) => (
+                    <li
+                      key={r.id}
+                      className="rounded-md border border-[#e4c36a]/15 bg-[#070b14] p-4 text-sm"
+                    >
+                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+                        <span className="font-semibold text-[#e4c36a]">
+                          {r.name}
+                        </span>
+                        <span className="text-xs text-[#9aa6b8]">
+                          {new Date(r.created_at).toLocaleString()}
+                        </span>
+                      </div>
+                      <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[#cdd6e4]">
+                        <a className="underline" href={`tel:${r.phone.replace(/[^0-9+]/g, "")}`}>
+                          {r.phone}
+                        </a>
+                        {r.email && (
+                          <a className="underline" href={`mailto:${r.email}`}>
+                            {r.email}
+                          </a>
+                        )}
+                        {r.service && (
+                          <span className="text-[#9aa6b8]">{r.service}</span>
+                        )}
+                      </div>
+                      <p className="mt-2 whitespace-pre-wrap text-[#cdd6e4]">
+                        {r.message}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Panel>
 
             {stats.totals.pageviews === 0 && (
               <p className="text-sm text-[#9aa6b8]">
