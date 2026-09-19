@@ -57,6 +57,9 @@ export const Route = createFileRoute("/")({
           "Family-owned seamless gutter experts serving Jacksonville, Orange Park, Ponte Vedra, Nocatee, St. Augustine & 20+ Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
       },
     ],
+    links: [
+      { rel: "canonical", href: "https://getguttersjax.com/" },
+    ],
   }),
   component: Index,
 });
