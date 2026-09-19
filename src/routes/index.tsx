@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import logo from "@/assets/logo.jpeg.asset.json";
 import truckTrailer from "@/assets/truck-trailer.jpeg.asset.json";
 import truckGate from "@/assets/truck-gate.jpeg.asset.json";
@@ -207,8 +207,14 @@ function Index() {
                 href={`tel:${PHONE_TEL}`}
                 className="inline-flex items-center gap-2 rounded-full bg-gold-gradient px-7 py-3.5 font-semibold text-primary-foreground shadow-gold transition hover:brightness-110"
               >
-                <Phone className="h-4 w-4" /> Free Estimate — {PHONE}
+                <Phone className="h-4 w-4" /> Call {PHONE}
               </a>
+              <Link
+                to="/free-estimate"
+                className="inline-flex items-center gap-2 rounded-full bg-gold-gradient px-7 py-3.5 font-semibold text-primary-foreground shadow-gold transition hover:brightness-110"
+              >
+                <Mail className="h-4 w-4" /> Get Free Estimate — Email Us
+              </Link>
               <a
                 href={`sms:${PHONE_TEL}`}
                 className="inline-flex items-center gap-2 rounded-full border border-primary/50 px-7 py-3.5 font-semibold text-primary transition hover:bg-primary/10"
