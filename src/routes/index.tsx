@@ -154,14 +154,24 @@ function Index() {
             <a href="#gallery" className="text-sm text-muted-foreground hover:text-primary">Gallery</a>
             <a href="#contact" className="text-sm text-muted-foreground hover:text-primary">Contact</a>
           </nav>
-          <a
-            href={`tel:${PHONE_TEL}`}
-            className="inline-flex items-center gap-2 rounded-full bg-gold-gradient px-4 py-2 text-sm font-semibold text-primary-foreground shadow-gold transition hover:brightness-110"
-          >
-            <Phone className="h-4 w-4" />
-            <span className="hidden sm:inline">{PHONE}</span>
-            <span className="sm:hidden">Call</span>
-          </a>
+          <div className="flex items-center gap-2">
+            <Link
+              to="/free-estimate"
+              className="inline-flex items-center gap-2 rounded-full border border-primary/50 px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary/10"
+            >
+              <Mail className="h-4 w-4" />
+              <span className="hidden sm:inline">Get Free Estimate</span>
+              <span className="sm:hidden">Estimate</span>
+            </Link>
+            <a
+              href={`tel:${PHONE_TEL}`}
+              className="inline-flex items-center gap-2 rounded-full bg-gold-gradient px-4 py-2 text-sm font-semibold text-primary-foreground shadow-gold transition hover:brightness-110"
+            >
+              <Phone className="h-4 w-4" />
+              <span className="hidden sm:inline">{PHONE}</span>
+              <span className="sm:hidden">Call</span>
+            </a>
+          </div>
         </div>
       </header>
 
