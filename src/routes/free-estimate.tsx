@@ -13,7 +13,7 @@ export const Route = createFileRoute("/free-estimate")({
       {
         name: "description",
         content:
-          "Request a free, no-pressure gutter or fence estimate from Get Gutters. Serving Jacksonville, Orange Park, Ponte Vedra, Nocatee, St. Augustine and Northeast Florida.",
+          "Request a free, no-pressure gutter estimate from Get Gutters. Serving Jacksonville, Orange Park, Ponte Vedra, Nocatee, St. Augustine and Northeast Florida.",
       },
       {
         property: "og:title",
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/free-estimate")({
       {
         property: "og:description",
         content:
-          "Request a free, no-pressure gutter or fence estimate from Get Gutters — Northeast Florida's seamless gutter experts.",
+          "Request a free, no-pressure gutter estimate from Get Gutters — Northeast Florida's seamless gutter experts.",
       },
     ],
   }),
