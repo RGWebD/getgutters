@@ -424,11 +424,17 @@ function Index() {
                   written estimate. Most estimates scheduled within 24 hours.
                 </p>
                 <div className="mt-8 flex flex-col items-start gap-3">
-                  <a
-                    href={`tel:${PHONE_TEL}`}
+                  <Link
+                    to="/free-estimate"
                     className="inline-flex items-center gap-3 rounded-full bg-gold-gradient px-8 py-4 text-lg font-semibold text-primary-foreground shadow-gold transition hover:brightness-110"
                   >
-                    <Phone className="h-5 w-5" /> {PHONE}
+                    <Mail className="h-5 w-5" /> Get Free Estimate — Email Us
+                  </Link>
+                  <a
+                    href={`tel:${PHONE_TEL}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-primary/50 px-7 py-3 font-semibold text-primary transition hover:bg-primary/10"
+                  >
+                    <Phone className="h-4 w-4" /> Call {PHONE}
                   </a>
                   <a
                     href={`sms:${PHONE_TEL}`}
