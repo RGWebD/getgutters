@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      estimate_requests: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          message: string
+          name: string
+          phone: string
+          service: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message: string
+          name: string
+          phone: string
+          service?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string
+          name?: string
+          phone?: string
+          service?: string | null
+        }
+        Relationships: []
+      }
       page_views: {
         Row: {
           created_at: string
