@@ -27,7 +27,6 @@ import {
   Sparkles,
   CheckCircle2,
   Hammer,
-  TreePine,
   ArrowRight,
   Award,
   Instagram,
