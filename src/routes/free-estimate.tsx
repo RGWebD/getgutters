@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import { Mail, Phone, CheckCircle2, ArrowLeft } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { submitEstimateRequest } from "@/lib/estimate.functions";
 
 export const Route = createFileRoute("/free-estimate")({
   head: () => ({
@@ -96,14 +96,20 @@ function FreeEstimatePage() {
       return;
     }
     setStatus("sending");
-    const { error } = await supabase.from("estimate_requests").insert({
-      name: parsed.data.name,
-      phone: parsed.data.phone,
-      email: parsed.data.email || null,
-      service: parsed.data.service,
-      message: parsed.data.message,
-    });
-    setStatus(error ? "error" : "sent");
+    try {
+      await submitEstimateRequest({
+        data: {
+          name: parsed.data.name,
+          phone: parsed.data.phone,
+          email: parsed.data.email || "",
+          service: parsed.data.service,
+          message: parsed.data.message,
+        },
+      });
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
