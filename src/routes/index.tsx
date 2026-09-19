@@ -33,6 +33,7 @@ import {
   Instagram,
   Facebook,
   MessageSquare,
+  Mail,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
