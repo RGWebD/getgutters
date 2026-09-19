@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import { Mail, Phone, CheckCircle2, ArrowLeft } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { submitEstimateRequest } from "@/lib/estimate.functions";
 
 export const Route = createFileRoute("/free-estimate")({
   head: () => ({
