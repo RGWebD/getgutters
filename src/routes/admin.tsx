@@ -99,8 +99,19 @@ function AdminPage() {
   return <Dashboard />;
 }
 
+type EstimateRequest = {
+  id: string;
+  name: string;
+  phone: string;
+  email: string | null;
+  service: string | null;
+  message: string;
+  created_at: string;
+};
+
 function Dashboard() {
   const [rows, setRows] = useState<Row[] | null>(null);
+  const [requests, setRequests] = useState<EstimateRequest[] | null>(null);
   const [days, setDays] = useState(30);
   const [metric, setMetric] = useState<MetricKey>("visitors");
 
@@ -115,6 +126,14 @@ function Dashboard() {
       .limit(10000)
       .then(({ data }) => {
         if (active) setRows((data as Row[]) ?? []);
+      });
+    supabase
+      .from("estimate_requests")
+      .select("id, name, phone, email, service, message, created_at")
+      .order("created_at", { ascending: false })
+      .limit(200)
+      .then(({ data }) => {
+        if (active) setRequests((data as EstimateRequest[]) ?? []);
       });
     return () => {
       active = false;
