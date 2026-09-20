@@ -66,6 +66,8 @@ export const Route = createFileRoute("/")({
 
 const PHONE = "(904) 589-0000";
 const PHONE_TEL = "+19045890000";
+const ADDRESS = "585 Bowie Blvd, Orange Park, FL 32073";
+const HOURS = "Mon–Fri 7 AM–7 PM · Sat 7 AM–3 PM · Sun 9 AM–5 PM";
 
 const services = [
   {
@@ -452,7 +454,7 @@ function Index() {
                   <MapPin className="mt-0.5 h-5 w-5 text-primary" />
                   <div>
                     <div className="font-semibold">Location</div>
-                    <div className="text-muted-foreground">585 Bowie Blvd, Orange Park, FL 32073</div>
+                    <div className="text-muted-foreground">{ADDRESS}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 rounded-xl border border-border bg-background/50 p-4">
@@ -460,7 +462,7 @@ function Index() {
                   <div>
                     <div className="font-semibold">Hours</div>
                     <div className="text-muted-foreground">
-                      Mon–Fri 7 AM – 7 PM · Sat 7 AM – 3 PM · Sun 9 AM – 5 PM
+                      {HOURS}
                     </div>
                   </div>
                 </div>
@@ -522,8 +524,8 @@ function Index() {
             <div className="text-xs uppercase tracking-[0.25em] text-primary">Contact</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {PHONE}</li>
-              <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> 585 Bowie Blvd, Orange Park, FL</li>
-              <li className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> Mon–Sun · 7 AM – 7 PM</li>
+              <li className="flex items-center gap-2"><MapPin className="h-4 w-4 shrink-0 text-primary" /> {ADDRESS}</li>
+              <li className="flex items-center gap-2"><Clock className="h-4 w-4 shrink-0 text-primary" /> {HOURS}</li>
             </ul>
           </div>
         </div>
