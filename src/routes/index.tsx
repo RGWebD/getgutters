@@ -352,8 +352,7 @@ function Index() {
               Proudly serving <span className="text-gold-gradient">Northeast Florida.</span>
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Based in Orange Park — trusted throughout Jacksonville
-              and surrounding Northeast Florida communities.
+              Based in Orange Park — trusted throughout Jacksonville.
             </p>
           </div>
           <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
