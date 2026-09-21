@@ -121,7 +121,6 @@ const serviceAreas = [
   "Avondale",
   "Riverside",
   "Ortega",
-  "Jacksonville Beach",
   "Green Cove Springs",
 ];
 
