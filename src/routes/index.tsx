@@ -282,7 +282,8 @@ function Index() {
                 </>
               );
 
-              return "to" in s ? (
+              if ("to" in s && s.to) {
+                return (
                 <Link
                   key={s.title}
                   to={s.to}
@@ -290,7 +291,10 @@ function Index() {
                 >
                   {card}
                 </Link>
-              ) : (
+                );
+              }
+
+              return (
                 <div key={s.title} className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold">
                   {card}
                 </div>
