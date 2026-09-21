@@ -45,7 +45,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Family-owned seamless gutter experts serving Jacksonville, Orange Park, Ponte Vedra, Nocatee, St. Augustine & 20+ Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
+          "Family-owned seamless gutter experts serving Jacksonville, Orange Park and Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
       },
       {
         property: "og:title",
@@ -54,7 +54,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Family-owned seamless gutter experts serving Jacksonville, Orange Park, Ponte Vedra, Nocatee, St. Augustine & 20+ Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
+          "Family-owned seamless gutter experts serving Jacksonville, Orange Park and Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
       },
     ],
     links: [
@@ -111,9 +111,6 @@ const services = [
 const serviceAreas = [
   "Orange Park",
   "Jacksonville",
-  "Ponte Vedra",
-  "Nocatee",
-  "St. Augustine",
   "Fleming Island",
   "Middleburg",
   "Mandarin",
@@ -121,15 +118,8 @@ const serviceAreas = [
   "Avondale",
   "Riverside",
   "Ortega",
-  "Julington Creek",
-  "Fruit Cove",
   "Jacksonville Beach",
-  "Queen's Harbour",
-  "Deerwood",
-  "Sawgrass",
   "Green Cove Springs",
-  "St. Johns",
-  "Bartram Park",
 ];
 
 function Index() {
@@ -344,7 +334,7 @@ function Index() {
             </h2>
             <p className="mt-4 text-muted-foreground">
               Based in Orange Park — trusted throughout Jacksonville, the Beaches,
-              Ponte Vedra, Nocatee, St. Augustine and every premier community in between.
+              and surrounding Northeast Florida communities.
             </p>
           </div>
           <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
