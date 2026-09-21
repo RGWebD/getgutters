@@ -15,6 +15,9 @@ import { Route as EstimateRouteImport } from './routes/estimate'
 import { Route as DatabaseRouteImport } from './routes/database'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesSeamlessGutterInstallationRouteImport } from './routes/services.seamless-gutter-installation'
+import { Route as ServicesGutterRepairRouteImport } from './routes/services.gutter-repair'
+import { Route as ServicesGutterGuardsRouteImport } from './routes/services.gutter-guards'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const FreeEstimateRoute = FreeEstimateRouteImport.update({
@@ -47,6 +50,22 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesSeamlessGutterInstallationRoute =
+  ServicesSeamlessGutterInstallationRouteImport.update({
+    id: '/services/seamless-gutter-installation',
+    path: '/services/seamless-gutter-installation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesGutterRepairRoute = ServicesGutterRepairRouteImport.update({
+  id: '/services/gutter-repair',
+  path: '/services/gutter-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesGutterGuardsRoute = ServicesGutterGuardsRouteImport.update({
+  id: '/services/gutter-guards',
+  path: '/services/gutter-guards',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
@@ -61,6 +80,9 @@ export interface FileRoutesByFullPath {
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
   '/free-estimate': typeof FreeEstimateRoute
+  '/services/gutter-guards': typeof ServicesGutterGuardsRoute
+  '/services/gutter-repair': typeof ServicesGutterRepairRoute
+  '/services/seamless-gutter-installation': typeof ServicesSeamlessGutterInstallationRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
@@ -70,6 +92,9 @@ export interface FileRoutesByTo {
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
   '/free-estimate': typeof FreeEstimateRoute
+  '/services/gutter-guards': typeof ServicesGutterGuardsRoute
+  '/services/gutter-repair': typeof ServicesGutterRepairRoute
+  '/services/seamless-gutter-installation': typeof ServicesSeamlessGutterInstallationRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
@@ -80,6 +105,9 @@ export interface FileRoutesById {
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
   '/free-estimate': typeof FreeEstimateRoute
+  '/services/gutter-guards': typeof ServicesGutterGuardsRoute
+  '/services/gutter-repair': typeof ServicesGutterRepairRoute
+  '/services/seamless-gutter-installation': typeof ServicesSeamlessGutterInstallationRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
@@ -91,6 +119,9 @@ export interface FileRouteTypes {
     | '/estimate'
     | '/estimator'
     | '/free-estimate'
+    | '/services/gutter-guards'
+    | '/services/gutter-repair'
+    | '/services/seamless-gutter-installation'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -100,6 +131,9 @@ export interface FileRouteTypes {
     | '/estimate'
     | '/estimator'
     | '/free-estimate'
+    | '/services/gutter-guards'
+    | '/services/gutter-repair'
+    | '/services/seamless-gutter-installation'
     | '/lovable/email/transactional/preview'
   id:
     | '__root__'
@@ -109,6 +143,9 @@ export interface FileRouteTypes {
     | '/estimate'
     | '/estimator'
     | '/free-estimate'
+    | '/services/gutter-guards'
+    | '/services/gutter-repair'
+    | '/services/seamless-gutter-installation'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
@@ -119,6 +156,9 @@ export interface RootRouteChildren {
   EstimateRoute: typeof EstimateRoute
   EstimatorRoute: typeof EstimatorRoute
   FreeEstimateRoute: typeof FreeEstimateRoute
+  ServicesGutterGuardsRoute: typeof ServicesGutterGuardsRoute
+  ServicesGutterRepairRoute: typeof ServicesGutterRepairRoute
+  ServicesSeamlessGutterInstallationRoute: typeof ServicesSeamlessGutterInstallationRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
@@ -166,6 +206,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/seamless-gutter-installation': {
+      id: '/services/seamless-gutter-installation'
+      path: '/services/seamless-gutter-installation'
+      fullPath: '/services/seamless-gutter-installation'
+      preLoaderRoute: typeof ServicesSeamlessGutterInstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/gutter-repair': {
+      id: '/services/gutter-repair'
+      path: '/services/gutter-repair'
+      fullPath: '/services/gutter-repair'
+      preLoaderRoute: typeof ServicesGutterRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/gutter-guards': {
+      id: '/services/gutter-guards'
+      path: '/services/gutter-guards'
+      fullPath: '/services/gutter-guards'
+      preLoaderRoute: typeof ServicesGutterGuardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/preview': {
       id: '/lovable/email/transactional/preview'
       path: '/lovable/email/transactional/preview'
@@ -183,6 +244,10 @@ const rootRouteChildren: RootRouteChildren = {
   EstimateRoute: EstimateRoute,
   EstimatorRoute: EstimatorRoute,
   FreeEstimateRoute: FreeEstimateRoute,
+  ServicesGutterGuardsRoute: ServicesGutterGuardsRoute,
+  ServicesGutterRepairRoute: ServicesGutterRepairRoute,
+  ServicesSeamlessGutterInstallationRoute:
+    ServicesSeamlessGutterInstallationRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport

@@ -74,11 +74,13 @@ const services = [
     icon: Droplets,
     title: "Seamless Gutter Installation",
     desc: "Custom-fabricated on-site with our commercial K-style machine. One continuous piece — no leaks, no seams, no compromises.",
+    to: "/services/seamless-gutter-installation" as const,
   },
   {
     icon: Shield,
     title: "Gutter Guards & Leaf Protection",
     desc: "Micro-mesh and reverse-curve systems that keep leaves, pine needles and debris out — permanently.",
+    to: "/services/gutter-guards" as const,
   },
   {
     icon: Sparkles,
@@ -89,6 +91,7 @@ const services = [
     icon: Wrench,
     title: "Gutter Repair",
     desc: "Sagging sections, leaking miters, loose hangers, and downspout damage — repaired to factory-new condition.",
+    to: "/services/gutter-repair" as const,
   },
   {
     icon: Home,
@@ -268,18 +271,35 @@ function Index() {
             </p>
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((s) => (
-              <div
-                key={s.title}
-                className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold"
-              >
+            {services.map((s) => {
+              const card = (
+                <>
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition group-hover:bg-gold-gradient group-hover:text-primary-foreground">
                   <s.icon className="h-6 w-6" />
                 </div>
                 <h3 className="font-display text-xl font-semibold">{s.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
-              </div>
-            ))}
+                </>
+              );
+
+              if ("to" in s && s.to) {
+                return (
+                <Link
+                  key={s.title}
+                  to={s.to}
+                  className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {card}
+                </Link>
+                );
+              }
+
+              return (
+                <div key={s.title} className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold">
+                  {card}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -502,10 +522,10 @@ function Index() {
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-primary">Services</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li>Seamless 6" K-Style Installation</li>
+              <li><Link to="/services/seamless-gutter-installation" className="hover:text-primary">Seamless 6&quot; K-Style Installation</Link></li>
               <li>Gutter Cleaning</li>
-              <li>Gutter Guards</li>
-              <li>Gutter Repair</li>
+              <li><Link to="/services/gutter-guards" className="hover:text-primary">Gutter Guards</Link></li>
+              <li><Link to="/services/gutter-repair" className="hover:text-primary">Gutter Repair</Link></li>
               <li>Fascia & Soffit</li>
               <li>Commercial Gutters</li>
             </ul>
