@@ -2,7 +2,12 @@ import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   ChevronRight,
+  Clock,
+  Facebook,
   Home,
+  Instagram,
+  Mail,
+  MapPin,
   MessageSquare,
   Phone,
 } from "lucide-react";
@@ -58,15 +63,22 @@ export function ServicePage({ content }: { content: ServicePageContent }) {
               </div>
             </div>
           </Link>
+          <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
+            <a href="/#services" className="text-sm text-muted-foreground hover:text-primary">Services</a>
+            <a href="/#about" className="text-sm text-muted-foreground hover:text-primary">About</a>
+            <a href="/#areas" className="text-sm text-muted-foreground hover:text-primary">Service Areas</a>
+            <a href="/#gallery" className="text-sm text-muted-foreground hover:text-primary">Gallery</a>
+            <a href="/#contact" className="text-sm text-muted-foreground hover:text-primary">Contact</a>
+          </nav>
           <div className="flex items-center gap-2">
-            <a
-              href={`sms:${PHONE_TEL}`}
+            <Link
+              to="/free-estimate"
               className="inline-flex items-center gap-2 rounded-full border border-primary/50 px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <MessageSquare className="h-4 w-4" aria-hidden="true" />
-              <span className="hidden sm:inline">Text {PHONE}</span>
-              <span className="sm:hidden">Text</span>
-            </a>
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              <span className="hidden sm:inline">Get Free Estimate</span>
+              <span className="sm:hidden">Estimate</span>
+            </Link>
             <a
               href={`tel:${PHONE_TEL}`}
               className="inline-flex items-center gap-2 rounded-full bg-gold-gradient px-4 py-2 text-sm font-semibold text-primary-foreground shadow-gold transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -215,26 +227,38 @@ export function ServicePage({ content }: { content: ServicePageContent }) {
           <div>
             <div className="flex items-center gap-3">
               <img src={logo.url} alt="Get Gutters" className="h-11 w-11 rounded-md object-contain" />
-              <div className="font-display text-xl font-bold">GET <span className="text-gold-gradient">GUTTERS</span></div>
+              <div>
+                <div className="font-display text-xl font-bold">GET <span className="text-gold-gradient">GUTTERS</span></div>
+                <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Master Craftsmen · Seamless Excellence</div>
+              </div>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">Family-owned seamless gutter specialists serving Orange Park, Jacksonville, and Northeast Florida.</p>
+            <div className="mt-5 flex gap-3">
+              <a href="https://www.facebook.com/getguttersjax" target="_blank" rel="noreferrer" className="rounded-full border border-border p-2 text-muted-foreground hover:border-primary hover:text-primary" aria-label="Get Gutters on Facebook"><Facebook className="h-4 w-4" aria-hidden="true" /></a>
+              <a href="https://www.instagram.com/getguttersjax/" target="_blank" rel="noreferrer" className="rounded-full border border-border p-2 text-muted-foreground hover:border-primary hover:text-primary" aria-label="Get Gutters on Instagram"><Instagram className="h-4 w-4" aria-hidden="true" /></a>
+            </div>
           </div>
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-primary">Services</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/services/seamless-gutter-installation" className="hover:text-primary">Seamless Gutter Installation</Link></li>
+              <li><Link to="/services/seamless-gutter-installation" className="hover:text-primary">Seamless 6&quot; K-Style Installation</Link></li>
+              <li>Gutter Cleaning</li>
               <li><Link to="/services/gutter-repair" className="hover:text-primary">Gutter Repair</Link></li>
               <li><Link to="/services/gutter-guards" className="hover:text-primary">Gutter Guards</Link></li>
+              <li>Fascia &amp; Soffit</li>
+              <li>Commercial Gutters</li>
             </ul>
           </div>
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-primary">Contact</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li>{PHONE}</li><li>{ADDRESS}</li><li>{HOURS}</li>
+              <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" aria-hidden="true" /> {PHONE}</li>
+              <li className="flex items-center gap-2"><MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" /> {ADDRESS}</li>
+              <li className="flex items-center gap-2"><Clock className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" /> {HOURS}</li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">© {new Date().getFullYear()} Get Gutters. All rights reserved.</div>
+        <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">© {new Date().getFullYear()} Get Gutters. Licensed &amp; Insured. All rights reserved.</div>
         <a href="https://www.rgwebd.com" target="_blank" rel="noreferrer" className="group block overflow-hidden border-t border-primary/30 bg-gradient-to-r from-background via-secondary to-background py-3" aria-label="Powered by RGWebD">
           <div className="flex animate-marquee whitespace-nowrap">
             {Array.from({ length: 2 }).flatMap((_, group) => Array.from({ length: 6 }).map((_, index) => (
