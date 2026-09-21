@@ -10,6 +10,7 @@ import {
   YAxis,
 } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
+import { getGscData, type GscResult } from "@/lib/gsc.functions";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -114,6 +115,7 @@ function Dashboard() {
   const [requests, setRequests] = useState<EstimateRequest[] | null>(null);
   const [days, setDays] = useState(30);
   const [metric, setMetric] = useState<MetricKey>("visitors");
+  const [gsc, setGsc] = useState<GscResult | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -135,6 +137,9 @@ function Dashboard() {
       .then(({ data }) => {
         if (active) setRequests((data as EstimateRequest[]) ?? []);
       });
+    getGscData().then((data) => {
+      if (active) setGsc(data);
+    });
     return () => {
       active = false;
     };
@@ -400,6 +405,165 @@ function Dashboard() {
               )}
             </Panel>
 
+            {/* Google Search Console */}
+            <Panel title="Google Search Console">
+              {gsc === null ? (
+                <p className="text-sm text-[#9aa6b8]">Loading…</p>
+              ) : gsc.error ? (
+                <p className="text-sm text-[#9aa6b8]">{gsc.error}</p>
+              ) : (
+                <div className="space-y-4">
+                  {gsc.indexing && (
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span
+                        className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                          gsc.indexing.verdict === "PASS"
+                            ? "bg-green-500/20 text-green-400"
+                            : gsc.indexing.verdict === "FAIL"
+                            ? "bg-red-500/20 text-red-400"
+                            : "bg-yellow-500/20 text-yellow-400"
+                        }`}
+                      >
+                        {gsc.indexing.verdict === "PASS"
+                          ? "Indexed ✓"
+                          : gsc.indexing.verdict}
+                      </span>
+                      <span className="text-xs text-[#9aa6b8]">
+                        {gsc.indexing.coverageState} · {gsc.indexing.pageFetchState}
+                      </span>
+                      {gsc.indexing.lastCrawlTime && (
+                        <span className="text-xs text-[#9aa6b8]">
+                          Last crawled:{" "}
+                          {new Date(gsc.indexing.lastCrawlTime).toLocaleString()}
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    <GscMetric
+                      label="Clicks"
+                      value={
+                        gsc.performance
+                          ? gsc.performance.clicks.toLocaleString()
+                          : "—"
+                      }
+                    />
+                    <GscMetric
+                      label="Impressions"
+                      value={
+                        gsc.performance
+                          ? gsc.performance.impressions.toLocaleString()
+                          : "—"
+                      }
+                    />
+                    <GscMetric
+                      label="Avg. CTR"
+                      value={
+                        gsc.performance
+                          ? `${(gsc.performance.ctr * 100).toFixed(1)}%`
+                          : "—"
+                      }
+                    />
+                    <GscMetric
+                      label="Avg. Position"
+                      value={
+                        gsc.performance
+                          ? gsc.performance.position.toFixed(1)
+                          : "—"
+                      }
+                    />
+                  </div>
+
+                  {gsc.performance &&
+                    gsc.performance.clicks === 0 &&
+                    gsc.performance.impressions === 0 && (
+                      <p className="text-xs text-[#9aa6b8]">
+                        No search data yet — Google typically takes 3–7 days
+                        to show search performance. Date range:{" "}
+                        {gsc.dateRange.start} to {gsc.dateRange.end}
+                      </p>
+                    )}
+
+                  {gsc.topQueries.length > 0 && (
+                    <div>
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#9aa6b8]">
+                        Top Search Queries
+                      </p>
+                      <ul className="space-y-1 text-sm">
+                        {gsc.topQueries.map((q) => (
+                          <li
+                            key={q.key}
+                            className="flex items-center justify-between gap-3"
+                          >
+                            <span className="truncate text-[#cdd6e4]">
+                              {q.key}
+                            </span>
+                            <span className="flex gap-3 text-xs text-[#9aa6b8]">
+                              <span>{q.clicks} clicks</span>
+                              <span>{q.impressions} impr.</span>
+                              <span>#{q.position.toFixed(0)}</span>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {gsc.topPages.length > 0 && (
+                    <div>
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#9aa6b8]">
+                        Top Pages in Search
+                      </p>
+                      <ul className="space-y-1 text-sm">
+                        {gsc.topPages.map((p) => (
+                          <li
+                            key={p.key}
+                            className="flex items-center justify-between gap-3"
+                          >
+                            <span className="truncate text-[#cdd6e4]">
+                              {p.key.replace("https://getguttersjax.com", "")}
+                            </span>
+                            <span className="flex gap-3 text-xs text-[#9aa6b8]">
+                              <span>{p.clicks} clicks</span>
+                              <span>{p.impressions} impr.</span>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {gsc.sitemaps.length > 0 && (
+                    <div>
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#9aa6b8]">
+                        Sitemap
+                      </p>
+                      {gsc.sitemaps.map((s) => (
+                        <div
+                          key={s.path}
+                          className="flex items-center justify-between gap-3 text-sm"
+                        >
+                          <span className="truncate text-[#cdd6e4]">
+                            {s.path}
+                          </span>
+                          <span
+                            className={`text-xs ${
+                              s.status === "OK"
+                                ? "text-green-400"
+                                : "text-red-400"
+                            }`}
+                          >
+                            {s.status} ({s.errors} errors, {s.warnings} warnings)
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </Panel>
+
             {stats.totals.pageviews === 0 && (
               <p className="text-sm text-[#9aa6b8]">
                 No visits recorded yet — numbers start counting from today.
@@ -442,5 +606,14 @@ function List({ items, total }: { items: [string, number][]; total: number }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+function GscMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-[#e4c36a]/15 bg-[#070b14] p-3">
+      <p className="text-xs text-[#9aa6b8]">{label}</p>
+      <p className="mt-1 font-display text-2xl text-[#e4c36a]">{value}</p>
+    </div>
   );
 }
