@@ -79,6 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "Tp5ErYRGN-cf46XHxIpYWHQAcKsyVrd9E3MlzRxJSsk" },
       { title: "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL" },
       {
         name: "description",
