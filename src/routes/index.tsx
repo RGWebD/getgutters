@@ -122,6 +122,7 @@ const serviceAreas = [
   "Riverside",
   "Ortega",
   "Green Cove Springs",
+  "Oakleaf Plantation",
 ];
 
 function Index() {
