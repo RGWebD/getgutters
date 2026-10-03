@@ -25,6 +25,9 @@ export const Route = createFileRoute("/free-estimate")({
           "Request a free, no-pressure gutter estimate from Get Gutters — Northeast Florida's seamless gutter experts.",
       },
     ],
+    links: [
+      { rel: "canonical", href: "https://getguttersjax.com/free-estimate" },
+    ],
   }),
   component: FreeEstimatePage,
 });

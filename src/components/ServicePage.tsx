@@ -25,7 +25,11 @@ export type ServiceLink = {
   to:
     | "/services/seamless-gutter-installation"
     | "/services/gutter-repair"
-    | "/services/gutter-guards";
+    | "/services/gutter-guards"
+    | "/services/gutter-cleaning"
+    | "/services/fascia-soffit"
+    | "/services/commercial-gutters"
+    | "/services/downspout-installation";
 };
 
 export type ServicePageContent = {
@@ -242,11 +246,12 @@ export function ServicePage({ content }: { content: ServicePageContent }) {
             <div className="text-xs uppercase tracking-[0.25em] text-primary">Services</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
               <li><Link to="/services/seamless-gutter-installation" className="hover:text-primary">Seamless 6&quot; K-Style Installation</Link></li>
-              <li>Gutter Cleaning</li>
+              <li><Link to="/services/gutter-cleaning" className="hover:text-primary">Gutter Cleaning</Link></li>
               <li><Link to="/services/gutter-repair" className="hover:text-primary">Gutter Repair</Link></li>
               <li><Link to="/services/gutter-guards" className="hover:text-primary">Gutter Guards</Link></li>
-              <li>Fascia &amp; Soffit</li>
-              <li>Commercial Gutters</li>
+              <li><Link to="/services/fascia-soffit" className="hover:text-primary">Fascia &amp; Soffit</Link></li>
+              <li><Link to="/services/commercial-gutters" className="hover:text-primary">Commercial Gutters</Link></li>
+              <li><Link to="/services/downspout-installation" className="hover:text-primary">Downspout Installation</Link></li>
             </ul>
           </div>
           <div>

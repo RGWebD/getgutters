@@ -18,6 +18,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSeamlessGutterInstallationRouteImport } from './routes/services.seamless-gutter-installation'
 import { Route as ServicesGutterRepairRouteImport } from './routes/services.gutter-repair'
 import { Route as ServicesGutterGuardsRouteImport } from './routes/services.gutter-guards'
+import { Route as ServicesGutterCleaningRouteImport } from './routes/services.gutter-cleaning'
+import { Route as ServicesFasciaSoffitRouteImport } from './routes/services.fascia-soffit'
+import { Route as ServicesDownspoutInstallationRouteImport } from './routes/services.downspout-installation'
+import { Route as ServicesCommercialGuttersRouteImport } from './routes/services.commercial-gutters'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const FreeEstimateRoute = FreeEstimateRouteImport.update({
@@ -66,6 +70,28 @@ const ServicesGutterGuardsRoute = ServicesGutterGuardsRouteImport.update({
   path: '/services/gutter-guards',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesGutterCleaningRoute = ServicesGutterCleaningRouteImport.update({
+  id: '/services/gutter-cleaning',
+  path: '/services/gutter-cleaning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesFasciaSoffitRoute = ServicesFasciaSoffitRouteImport.update({
+  id: '/services/fascia-soffit',
+  path: '/services/fascia-soffit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesDownspoutInstallationRoute =
+  ServicesDownspoutInstallationRouteImport.update({
+    id: '/services/downspout-installation',
+    path: '/services/downspout-installation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesCommercialGuttersRoute =
+  ServicesCommercialGuttersRouteImport.update({
+    id: '/services/commercial-gutters',
+    path: '/services/commercial-gutters',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
@@ -80,6 +106,10 @@ export interface FileRoutesByFullPath {
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
   '/free-estimate': typeof FreeEstimateRoute
+  '/services/commercial-gutters': typeof ServicesCommercialGuttersRoute
+  '/services/downspout-installation': typeof ServicesDownspoutInstallationRoute
+  '/services/fascia-soffit': typeof ServicesFasciaSoffitRoute
+  '/services/gutter-cleaning': typeof ServicesGutterCleaningRoute
   '/services/gutter-guards': typeof ServicesGutterGuardsRoute
   '/services/gutter-repair': typeof ServicesGutterRepairRoute
   '/services/seamless-gutter-installation': typeof ServicesSeamlessGutterInstallationRoute
@@ -92,6 +122,10 @@ export interface FileRoutesByTo {
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
   '/free-estimate': typeof FreeEstimateRoute
+  '/services/commercial-gutters': typeof ServicesCommercialGuttersRoute
+  '/services/downspout-installation': typeof ServicesDownspoutInstallationRoute
+  '/services/fascia-soffit': typeof ServicesFasciaSoffitRoute
+  '/services/gutter-cleaning': typeof ServicesGutterCleaningRoute
   '/services/gutter-guards': typeof ServicesGutterGuardsRoute
   '/services/gutter-repair': typeof ServicesGutterRepairRoute
   '/services/seamless-gutter-installation': typeof ServicesSeamlessGutterInstallationRoute
@@ -105,6 +139,10 @@ export interface FileRoutesById {
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
   '/free-estimate': typeof FreeEstimateRoute
+  '/services/commercial-gutters': typeof ServicesCommercialGuttersRoute
+  '/services/downspout-installation': typeof ServicesDownspoutInstallationRoute
+  '/services/fascia-soffit': typeof ServicesFasciaSoffitRoute
+  '/services/gutter-cleaning': typeof ServicesGutterCleaningRoute
   '/services/gutter-guards': typeof ServicesGutterGuardsRoute
   '/services/gutter-repair': typeof ServicesGutterRepairRoute
   '/services/seamless-gutter-installation': typeof ServicesSeamlessGutterInstallationRoute
@@ -119,6 +157,10 @@ export interface FileRouteTypes {
     | '/estimate'
     | '/estimator'
     | '/free-estimate'
+    | '/services/commercial-gutters'
+    | '/services/downspout-installation'
+    | '/services/fascia-soffit'
+    | '/services/gutter-cleaning'
     | '/services/gutter-guards'
     | '/services/gutter-repair'
     | '/services/seamless-gutter-installation'
@@ -131,6 +173,10 @@ export interface FileRouteTypes {
     | '/estimate'
     | '/estimator'
     | '/free-estimate'
+    | '/services/commercial-gutters'
+    | '/services/downspout-installation'
+    | '/services/fascia-soffit'
+    | '/services/gutter-cleaning'
     | '/services/gutter-guards'
     | '/services/gutter-repair'
     | '/services/seamless-gutter-installation'
@@ -143,6 +189,10 @@ export interface FileRouteTypes {
     | '/estimate'
     | '/estimator'
     | '/free-estimate'
+    | '/services/commercial-gutters'
+    | '/services/downspout-installation'
+    | '/services/fascia-soffit'
+    | '/services/gutter-cleaning'
     | '/services/gutter-guards'
     | '/services/gutter-repair'
     | '/services/seamless-gutter-installation'
@@ -156,6 +206,10 @@ export interface RootRouteChildren {
   EstimateRoute: typeof EstimateRoute
   EstimatorRoute: typeof EstimatorRoute
   FreeEstimateRoute: typeof FreeEstimateRoute
+  ServicesCommercialGuttersRoute: typeof ServicesCommercialGuttersRoute
+  ServicesDownspoutInstallationRoute: typeof ServicesDownspoutInstallationRoute
+  ServicesFasciaSoffitRoute: typeof ServicesFasciaSoffitRoute
+  ServicesGutterCleaningRoute: typeof ServicesGutterCleaningRoute
   ServicesGutterGuardsRoute: typeof ServicesGutterGuardsRoute
   ServicesGutterRepairRoute: typeof ServicesGutterRepairRoute
   ServicesSeamlessGutterInstallationRoute: typeof ServicesSeamlessGutterInstallationRoute
@@ -227,6 +281,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesGutterGuardsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/gutter-cleaning': {
+      id: '/services/gutter-cleaning'
+      path: '/services/gutter-cleaning'
+      fullPath: '/services/gutter-cleaning'
+      preLoaderRoute: typeof ServicesGutterCleaningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/fascia-soffit': {
+      id: '/services/fascia-soffit'
+      path: '/services/fascia-soffit'
+      fullPath: '/services/fascia-soffit'
+      preLoaderRoute: typeof ServicesFasciaSoffitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/downspout-installation': {
+      id: '/services/downspout-installation'
+      path: '/services/downspout-installation'
+      fullPath: '/services/downspout-installation'
+      preLoaderRoute: typeof ServicesDownspoutInstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/commercial-gutters': {
+      id: '/services/commercial-gutters'
+      path: '/services/commercial-gutters'
+      fullPath: '/services/commercial-gutters'
+      preLoaderRoute: typeof ServicesCommercialGuttersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/preview': {
       id: '/lovable/email/transactional/preview'
       path: '/lovable/email/transactional/preview'
@@ -244,6 +326,10 @@ const rootRouteChildren: RootRouteChildren = {
   EstimateRoute: EstimateRoute,
   EstimatorRoute: EstimatorRoute,
   FreeEstimateRoute: FreeEstimateRoute,
+  ServicesCommercialGuttersRoute: ServicesCommercialGuttersRoute,
+  ServicesDownspoutInstallationRoute: ServicesDownspoutInstallationRoute,
+  ServicesFasciaSoffitRoute: ServicesFasciaSoffitRoute,
+  ServicesGutterCleaningRoute: ServicesGutterCleaningRoute,
   ServicesGutterGuardsRoute: ServicesGutterGuardsRoute,
   ServicesGutterRepairRoute: ServicesGutterRepairRoute,
   ServicesSeamlessGutterInstallationRoute:
