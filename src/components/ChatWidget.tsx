@@ -142,31 +142,36 @@ export function ChatWidget() {
               e.preventDefault();
               send(input);
             }}
-            className="flex items-end gap-2 border-t border-border p-3"
+            className="border-t border-border p-3"
           >
-            <textarea
-              ref={inputRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  send(input);
-                }
-              }}
-              rows={1}
-              maxLength={1000}
-              placeholder="Type your message…"
-              className="max-h-28 flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary"
-            />
-            <button
-              type="submit"
-              disabled={busy || !input.trim()}
-              aria-label="Send"
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-gradient text-primary-foreground disabled:opacity-50"
-            >
-              <Send className="h-4 w-4" />
-            </button>
+            <div className="flex items-end gap-2">
+              <textarea
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    send(input);
+                  }
+                }}
+                rows={1}
+                maxLength={1000}
+                placeholder="Type your message…"
+                className="max-h-28 flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary"
+              />
+              <button
+                type="submit"
+                disabled={busy || !input.trim()}
+                aria-label="Send"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-gradient text-primary-foreground disabled:opacity-50"
+              >
+                <Send className="h-4 w-4" />
+              </button>
+            </div>
+            <p className="mt-2 text-[10px] leading-snug text-muted-foreground">
+              Messages are saved to help with estimates. Do not share sensitive information.
+            </p>
           </form>
         </div>
       )}

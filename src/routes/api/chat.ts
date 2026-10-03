@@ -17,12 +17,16 @@ export const Route = createFileRoute("/api/chat")({
 
         let body: { conversationId?: string; messages?: UIMessage[] };
         try {
-          body = await request.json();
+          const rawBody = await request.text();
+          if (rawBody.length > 50_000) {
+            return new Response("Request too large", { status: 413 });
+          }
+          body = JSON.parse(rawBody);
         } catch {
           return new Response("Invalid request", { status: 400 });
         }
         const conversationId = body.conversationId ?? "";
-        const messages = Array.isArray(body.messages) ? body.messages.slice(-40) : [];
+        const messages = Array.isArray(body.messages) ? body.messages.slice(-20) : [];
         if (!UUID_RE.test(conversationId) || messages.length === 0) {
           return new Response("Invalid request", { status: 400 });
         }
@@ -49,7 +53,7 @@ export const Route = createFileRoute("/api/chat")({
           system: CHAT_SYSTEM_PROMPT,
           messages: await convertToModelMessages(messages),
           abortSignal: request.signal,
-          stopWhen: stepCountIs(50),
+          stopWhen: stepCountIs(8),
           providerOptions: {
             openai: {
               forceReasoning: true,
@@ -64,11 +68,22 @@ export const Route = createFileRoute("/api/chat")({
               description:
                 "Save the customer's contact info and project request so Pablo gets an email and can follow up with a free estimate.",
               inputSchema: z.object({
-                name: z.string().describe("Customer full name"),
-                phone: z.string().describe("Customer phone number"),
-                email: z.string().nullable().describe("Customer email, or null"),
-                service: z.string().nullable().describe("Service needed, or null"),
-                details: z.string().describe("Project description, location/area, and any notes"),
+                name: z.string().trim().min(1).max(100).describe("Customer full name"),
+                phone: z
+                  .string()
+                  .trim()
+                  .min(7)
+                  .max(20)
+                  .regex(/^[0-9()+\-\s.]+$/)
+                  .describe("Customer phone number"),
+                email: z.string().trim().email().max(255).nullable().describe("Customer email, or null"),
+                service: z.string().trim().max(100).nullable().describe("Service needed, or null"),
+                details: z
+                  .string()
+                  .trim()
+                  .min(10)
+                  .max(2000)
+                  .describe("Project description, location/area, and any notes"),
               }),
               execute: async (input) => {
                 const name = input.name.trim().slice(0, 100);
