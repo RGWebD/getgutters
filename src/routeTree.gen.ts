@@ -9,40 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as FreeEstimateRouteImport } from './routes/free-estimate'
-import { Route as EstimatorRouteImport } from './routes/estimator'
-import { Route as EstimateRouteImport } from './routes/estimate'
-import { Route as DatabaseRouteImport } from './routes/database'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesSeamlessGutterInstallationRouteImport } from './routes/services.seamless-gutter-installation'
-import { Route as ServicesGutterRepairRouteImport } from './routes/services.gutter-repair'
-import { Route as ServicesGutterGuardsRouteImport } from './routes/services.gutter-guards'
-import { Route as ServicesGutterCleaningRouteImport } from './routes/services.gutter-cleaning'
-import { Route as ServicesFasciaSoffitRouteImport } from './routes/services.fascia-soffit'
-import { Route as ServicesDownspoutInstallationRouteImport } from './routes/services.downspout-installation'
-import { Route as ServicesCommercialGuttersRouteImport } from './routes/services.commercial-gutters'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as DatabaseRouteImport } from './routes/database'
+import { Route as EstimateRouteImport } from './routes/estimate'
+import { Route as EstimatorRouteImport } from './routes/estimator'
+import { Route as FreeEstimateRouteImport } from './routes/free-estimate'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ServicesCommercialGuttersRouteImport } from './routes/services.commercial-gutters'
+import { Route as ServicesDownspoutInstallationRouteImport } from './routes/services.downspout-installation'
+import { Route as ServicesFasciaSoffitRouteImport } from './routes/services.fascia-soffit'
+import { Route as ServicesGutterCleaningRouteImport } from './routes/services.gutter-cleaning'
+import { Route as ServicesGutterGuardsRouteImport } from './routes/services.gutter-guards'
+import { Route as ServicesGutterRepairRouteImport } from './routes/services.gutter-repair'
+import { Route as ServicesSeamlessGutterInstallationRouteImport } from './routes/services.seamless-gutter-installation'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
-const FreeEstimateRoute = FreeEstimateRouteImport.update({
-  id: '/free-estimate',
-  path: '/free-estimate',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EstimatorRoute = EstimatorRouteImport.update({
-  id: '/estimator',
-  path: '/estimator',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EstimateRoute = EstimateRouteImport.update({
-  id: '/estimate',
-  path: '/estimate',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DatabaseRoute = DatabaseRouteImport.update({
-  id: '/database',
-  path: '/database',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -50,9 +35,61 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const DatabaseRoute = DatabaseRouteImport.update({
+  id: '/database',
+  path: '/database',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstimateRoute = EstimateRouteImport.update({
+  id: '/estimate',
+  path: '/estimate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstimatorRoute = EstimatorRouteImport.update({
+  id: '/estimator',
+  path: '/estimator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FreeEstimateRoute = FreeEstimateRouteImport.update({
+  id: '/free-estimate',
+  path: '/free-estimate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesCommercialGuttersRoute =
+  ServicesCommercialGuttersRouteImport.update({
+    id: '/services/commercial-gutters',
+    path: '/services/commercial-gutters',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesDownspoutInstallationRoute =
+  ServicesDownspoutInstallationRouteImport.update({
+    id: '/services/downspout-installation',
+    path: '/services/downspout-installation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesFasciaSoffitRoute = ServicesFasciaSoffitRouteImport.update({
+  id: '/services/fascia-soffit',
+  path: '/services/fascia-soffit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesGutterCleaningRoute = ServicesGutterCleaningRouteImport.update({
+  id: '/services/gutter-cleaning',
+  path: '/services/gutter-cleaning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesGutterGuardsRoute = ServicesGutterGuardsRouteImport.update({
+  id: '/services/gutter-guards',
+  path: '/services/gutter-guards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesGutterRepairRoute = ServicesGutterRepairRouteImport.update({
+  id: '/services/gutter-repair',
+  path: '/services/gutter-repair',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesSeamlessGutterInstallationRoute =
@@ -61,43 +98,6 @@ const ServicesSeamlessGutterInstallationRoute =
     path: '/services/seamless-gutter-installation',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ServicesGutterRepairRoute = ServicesGutterRepairRouteImport.update({
-  id: '/services/gutter-repair',
-  path: '/services/gutter-repair',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesGutterGuardsRoute = ServicesGutterGuardsRouteImport.update({
-  id: '/services/gutter-guards',
-  path: '/services/gutter-guards',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesGutterCleaningRoute = ServicesGutterCleaningRouteImport.update({
-  id: '/services/gutter-cleaning',
-  path: '/services/gutter-cleaning',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesFasciaSoffitRoute = ServicesFasciaSoffitRouteImport.update({
-  id: '/services/fascia-soffit',
-  path: '/services/fascia-soffit',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesDownspoutInstallationRoute =
-  ServicesDownspoutInstallationRouteImport.update({
-    id: '/services/downspout-installation',
-    path: '/services/downspout-installation',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ServicesCommercialGuttersRoute =
-  ServicesCommercialGuttersRouteImport.update({
-    id: '/services/commercial-gutters',
-    path: '/services/commercial-gutters',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
@@ -231,32 +231,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/free-estimate': {
-      id: '/free-estimate'
-      path: '/free-estimate'
-      fullPath: '/free-estimate'
-      preLoaderRoute: typeof FreeEstimateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/estimator': {
-      id: '/estimator'
-      path: '/estimator'
-      fullPath: '/estimator'
-      preLoaderRoute: typeof EstimatorRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/estimate': {
-      id: '/estimate'
-      path: '/estimate'
-      fullPath: '/estimate'
-      preLoaderRoute: typeof EstimateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/database': {
-      id: '/database'
-      path: '/database'
-      fullPath: '/database'
-      preLoaderRoute: typeof DatabaseRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -266,53 +245,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/database': {
+      id: '/database'
+      path: '/database'
+      fullPath: '/database'
+      preLoaderRoute: typeof DatabaseRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/seamless-gutter-installation': {
-      id: '/services/seamless-gutter-installation'
-      path: '/services/seamless-gutter-installation'
-      fullPath: '/services/seamless-gutter-installation'
-      preLoaderRoute: typeof ServicesSeamlessGutterInstallationRouteImport
+    '/estimate': {
+      id: '/estimate'
+      path: '/estimate'
+      fullPath: '/estimate'
+      preLoaderRoute: typeof EstimateRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/gutter-repair': {
-      id: '/services/gutter-repair'
-      path: '/services/gutter-repair'
-      fullPath: '/services/gutter-repair'
-      preLoaderRoute: typeof ServicesGutterRepairRouteImport
+    '/estimator': {
+      id: '/estimator'
+      path: '/estimator'
+      fullPath: '/estimator'
+      preLoaderRoute: typeof EstimatorRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/gutter-guards': {
-      id: '/services/gutter-guards'
-      path: '/services/gutter-guards'
-      fullPath: '/services/gutter-guards'
-      preLoaderRoute: typeof ServicesGutterGuardsRouteImport
+    '/free-estimate': {
+      id: '/free-estimate'
+      path: '/free-estimate'
+      fullPath: '/free-estimate'
+      preLoaderRoute: typeof FreeEstimateRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/gutter-cleaning': {
-      id: '/services/gutter-cleaning'
-      path: '/services/gutter-cleaning'
-      fullPath: '/services/gutter-cleaning'
-      preLoaderRoute: typeof ServicesGutterCleaningRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/fascia-soffit': {
-      id: '/services/fascia-soffit'
-      path: '/services/fascia-soffit'
-      fullPath: '/services/fascia-soffit'
-      preLoaderRoute: typeof ServicesFasciaSoffitRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/downspout-installation': {
-      id: '/services/downspout-installation'
-      path: '/services/downspout-installation'
-      fullPath: '/services/downspout-installation'
-      preLoaderRoute: typeof ServicesDownspoutInstallationRouteImport
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/commercial-gutters': {
@@ -322,11 +287,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCommercialGuttersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
+    '/services/downspout-installation': {
+      id: '/services/downspout-installation'
+      path: '/services/downspout-installation'
+      fullPath: '/services/downspout-installation'
+      preLoaderRoute: typeof ServicesDownspoutInstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/fascia-soffit': {
+      id: '/services/fascia-soffit'
+      path: '/services/fascia-soffit'
+      fullPath: '/services/fascia-soffit'
+      preLoaderRoute: typeof ServicesFasciaSoffitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/gutter-cleaning': {
+      id: '/services/gutter-cleaning'
+      path: '/services/gutter-cleaning'
+      fullPath: '/services/gutter-cleaning'
+      preLoaderRoute: typeof ServicesGutterCleaningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/gutter-guards': {
+      id: '/services/gutter-guards'
+      path: '/services/gutter-guards'
+      fullPath: '/services/gutter-guards'
+      preLoaderRoute: typeof ServicesGutterGuardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/gutter-repair': {
+      id: '/services/gutter-repair'
+      path: '/services/gutter-repair'
+      fullPath: '/services/gutter-repair'
+      preLoaderRoute: typeof ServicesGutterRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/seamless-gutter-installation': {
+      id: '/services/seamless-gutter-installation'
+      path: '/services/seamless-gutter-installation'
+      fullPath: '/services/seamless-gutter-installation'
+      preLoaderRoute: typeof ServicesSeamlessGutterInstallationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/transactional/preview': {
