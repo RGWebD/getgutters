@@ -1,7 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 
 const VISITOR_KEY = "gg-visitor-id";
-const DEFAULT_GOOGLE_ANALYTICS_ID = "G-F9QEFRQLFT";
+const DEFAULT_GOOGLE_ANALYTICS_ID = "G-18CV9XFP06";
 
 type AnalyticsValue = string | number | boolean | undefined;
 type AnalyticsParams = Record<string, AnalyticsValue>;
