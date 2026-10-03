@@ -49,7 +49,8 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL",
+        content:
+          "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL",
       },
       {
         property: "og:description",
@@ -57,8 +58,84 @@ export const Route = createFileRoute("/")({
           "Family-owned seamless gutter experts serving Jacksonville, Orange Park and Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
       },
     ],
-    links: [
-      { rel: "canonical", href: "https://getguttersjax.com/" },
+    links: [{ rel: "canonical", href: "https://getguttersjax.com/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HomeAndConstructionBusiness",
+          "@id": "https://getguttersjax.com/#business",
+          name: "Get Gutters",
+          url: "https://getguttersjax.com/",
+          telephone: "+1-904-589-0000",
+          description:
+            "Family-owned gutter company providing seamless gutter installation, gutter cleaning, gutter repair, gutter guards, fascia and soffit work, commercial gutters, and downspout installation in Orange Park, Jacksonville, and nearby Northeast Florida communities.",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "585 Bowie Blvd",
+            addressLocality: "Orange Park",
+            addressRegion: "FL",
+            postalCode: "32073",
+            addressCountry: "US",
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "07:00",
+              closes: "19:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Saturday",
+              opens: "07:00",
+              closes: "15:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: "Sunday",
+              opens: "09:00",
+              closes: "17:00",
+            },
+          ],
+          areaServed: serviceAreas.map((area) => ({
+            "@type": "AdministrativeArea",
+            name: `${area}, Florida`,
+          })),
+          sameAs: [
+            "https://www.facebook.com/getguttersjax",
+            "https://www.instagram.com/getguttersjax/",
+          ],
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Gutter Services",
+            itemListElement: services.map((service) => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: service.title,
+                url: `https://getguttersjax.com${service.to}`,
+              },
+            })),
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: homepageFaqs.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        }),
+      },
     ],
   }),
   component: Index,
@@ -112,7 +189,6 @@ const services = [
     desc: "Oversized downspouts, decorative options, and underground drainage routing to protect your foundation.",
     to: "/services/downspout-installation" as const,
   },
-
 ];
 
 const serviceAreas = [
@@ -129,6 +205,34 @@ const serviceAreas = [
   "Oakleaf Plantation",
 ];
 
+const homepageFaqs = [
+  {
+    question: "What gutter services does Get Gutters provide?",
+    answer:
+      "Get Gutters provides seamless gutter installation, gutter cleaning, gutter repair, gutter guards, fascia and soffit work, commercial gutter systems, and downspout installation.",
+  },
+  {
+    question: "Do you provide free gutter estimates?",
+    answer:
+      "Yes. Homeowners and property managers can request a free estimate online or call or text Get Gutters at (904) 589-0000.",
+  },
+  {
+    question: "Are seamless gutters fabricated at the property?",
+    answer:
+      "Get Gutters uses a commercial K-style gutter machine to form continuous 6-inch aluminum gutter runs on-site for the planned roofline sections.",
+  },
+  {
+    question: "What areas does Get Gutters serve?",
+    answer:
+      "Get Gutters serves Orange Park, Jacksonville, Fleming Island, Middleburg, Mandarin, San Marco, Avondale, Riverside, Ortega, Green Cove Springs, Oakleaf Plantation, and nearby Northeast Florida communities.",
+  },
+  {
+    question: "How do I know whether my gutters need repair or replacement?",
+    answer:
+      "Leaks, sagging, loose hangers, damaged downspouts, overflow, and widespread deterioration should be assessed before deciding whether a focused repair or replacement is the better option.",
+  },
+] as const;
+
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -136,7 +240,11 @@ function Index() {
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-lg">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
           <a href="#top" className="flex items-center gap-3">
-            <img src={logo.url} alt="Get Gutters logo" className="h-11 w-11 rounded-md object-contain" />
+            <img
+              src={logo.url}
+              alt="Get Gutters logo"
+              className="h-11 w-11 rounded-md object-contain"
+            />
             <div className="leading-tight">
               <div className="font-display text-lg font-bold tracking-tight">
                 GET <span className="text-gold-gradient">GUTTERS</span>
@@ -147,11 +255,24 @@ function Index() {
             </div>
           </a>
           <nav className="hidden items-center gap-8 md:flex">
-            <a href="#services" className="text-sm text-muted-foreground hover:text-primary">Services</a>
-            <a href="#about" className="text-sm text-muted-foreground hover:text-primary">About</a>
-            <a href="#areas" className="text-sm text-muted-foreground hover:text-primary">Service Areas</a>
-            <a href="#gallery" className="text-sm text-muted-foreground hover:text-primary">Gallery</a>
-            <a href="#contact" className="text-sm text-muted-foreground hover:text-primary">Contact</a>
+            <a href="#services" className="text-sm text-muted-foreground hover:text-primary">
+              Services
+            </a>
+            <a href="#about" className="text-sm text-muted-foreground hover:text-primary">
+              About
+            </a>
+            <a href="#areas" className="text-sm text-muted-foreground hover:text-primary">
+              Service Areas
+            </a>
+            <a href="#gallery" className="text-sm text-muted-foreground hover:text-primary">
+              Gallery
+            </a>
+            <a href="#faq" className="text-sm text-muted-foreground hover:text-primary">
+              FAQ
+            </a>
+            <a href="#contact" className="text-sm text-muted-foreground hover:text-primary">
+              Contact
+            </a>
           </nav>
           <div className="flex items-center gap-2">
             <Link
@@ -196,14 +317,14 @@ function Index() {
             <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-primary">
               <Star className="h-3 w-3 fill-primary" /> 5.0 · 85+ Google Reviews
             </div>
-            <h1 className="font-display text-5xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
-              Flawless Craftsmanship.{" "}
-              <span className="text-gold-gradient">Professional Results.</span>
+            <h1 className="font-display text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+              Seamless Gutters &amp; Gutter Services in{" "}
+              <span className="text-gold-gradient">Jacksonville &amp; Orange Park</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-              Family-owned. Master-installed. Get Gutters protects Northeast
-              Florida's finest homes with custom-fabricated seamless gutter
-              systems — engineered on-site, installed to last a lifetime.
+              Family-owned. Master-installed. Get Gutters protects Northeast Florida's finest homes
+              with custom-fabricated seamless gutter systems — engineered on-site, installed to last
+              a lifetime.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a
@@ -239,21 +360,29 @@ function Index() {
               ].map((s) => (
                 <div key={s.l}>
                   <div className="font-display text-3xl font-bold text-gold-gradient">{s.n}</div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{s.l}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                    {s.l}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
           <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-primary/30 shadow-luxe">
-              <img src={truckGate.url} alt="Get Gutters truck and trailer" className="h-full w-full object-cover" />
+              <img
+                src={truckGate.url}
+                alt="Get Gutters truck and trailer"
+                className="h-full w-full object-cover"
+              />
             </div>
             <div className="absolute -bottom-6 -left-6 hidden rounded-xl border border-primary/40 bg-card/90 p-5 shadow-gold backdrop-blur lg:block">
               <div className="flex items-center gap-3">
                 <Award className="h-8 w-8 text-primary" />
                 <div>
                   <div className="font-semibold">Top-of-the-Line Equipment</div>
-                  <div className="text-xs text-muted-foreground">2025 Ram 3500 Cummins · Commercial K-Style Mill</div>
+                  <div className="text-xs text-muted-foreground">
+                    2025 Ram 3500 Cummins · Commercial K-Style Mill
+                  </div>
                 </div>
               </div>
             </div>
@@ -270,36 +399,39 @@ function Index() {
               Every gutter service. <span className="text-gold-gradient">Done right.</span>
             </h2>
             <p className="mt-4 text-muted-foreground">
-              From seamless installation to detailed cleanings and full fascia
-              rebuilds — we handle it all with the precision of a master craftsman.
+              From seamless installation to detailed cleanings and full fascia rebuilds — we handle
+              it all with the precision of a master craftsman.
             </p>
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((s) => {
               const card = (
                 <>
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition group-hover:bg-gold-gradient group-hover:text-primary-foreground">
-                  <s.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-display text-xl font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition group-hover:bg-gold-gradient group-hover:text-primary-foreground">
+                    <s.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-display text-xl font-semibold">{s.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
                 </>
               );
 
               if ("to" in s && s.to) {
                 return (
-                <Link
-                  key={s.title}
-                  to={s.to}
-                  className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  {card}
-                </Link>
+                  <Link
+                    key={s.title}
+                    to={s.to}
+                    className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    {card}
+                  </Link>
                 );
               }
 
               return (
-                <div key={s.title} className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold">
+                <div
+                  key={s.title}
+                  className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold"
+                >
                   {card}
                 </div>
               );
@@ -313,8 +445,16 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
           <div className="order-2 lg:order-1">
             <div className="grid gap-4 sm:grid-cols-2">
-              <img src={gutterMachine.url} alt="Seamless K-style gutter machine" className="rounded-2xl border border-primary/30 object-cover shadow-luxe" />
-              <img src={fasciaInstall.url} alt="Fascia installation" className="rounded-2xl border border-primary/30 object-cover shadow-luxe" />
+              <img
+                src={gutterMachine.url}
+                alt="Seamless K-style gutter machine"
+                className="rounded-2xl border border-primary/30 object-cover shadow-luxe"
+              />
+              <img
+                src={fasciaInstall.url}
+                alt="Fascia installation"
+                className="rounded-2xl border border-primary/30 object-cover shadow-luxe"
+              />
             </div>
           </div>
           <div className="order-1 lg:order-2">
@@ -323,15 +463,14 @@ function Index() {
               The gold standard in <span className="text-gold-gradient">Northeast Florida.</span>
             </h2>
             <p className="mt-5 text-muted-foreground">
-              We're a family-owned Orange Park company built on one belief: your
-              home deserves the best. That's why we roll up in a fully-loaded 2025
-              Ram 3500 Cummins with a commercial-grade seamless gutter mill on
-              board — so every foot of gutter is fabricated to your exact roofline,
-              on-site, in a single continuous run.
+              We're a family-owned Orange Park company built on one belief: your home deserves the
+              best. That's why we roll up in a fully-loaded 2025 Ram 3500 Cummins with a
+              commercial-grade seamless gutter mill on board — so every foot of gutter is fabricated
+              to your exact roofline, on-site, in a single continuous run.
             </p>
             <ul className="mt-6 space-y-3">
               {[
-                "Custom-milled seamless aluminum 6\" K-style gutters",
+                'Custom-milled seamless aluminum 6" K-style gutters',
                 "Hidden hangers with stainless steel screws — no nails",
 
                 "Licensed, insured, and background-checked crew",
@@ -383,8 +522,8 @@ function Index() {
               Craftsmanship you can <span className="text-gold-gradient">see.</span>
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Real installs across Northeast Florida — seamless K-style runs, custom
-              downspouts, precision miters, and clean fascia lines on every project.
+              Real installs across Northeast Florida — seamless K-style runs, custom downspouts,
+              precision miters, and clean fascia lines on every project.
             </p>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -419,9 +558,53 @@ function Index() {
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {[truckTrailer, truckGate, gutterMachine].map((img, i) => (
-              <div key={i} className="group overflow-hidden rounded-2xl border border-primary/30 shadow-luxe">
-                <img src={img.url} alt={`Get Gutters fleet ${i + 1}`} className="h-64 w-full object-cover transition duration-500 group-hover:scale-105" />
+              <div
+                key={i}
+                className="group overflow-hidden rounded-2xl border border-primary/30 shadow-luxe"
+              >
+                <img
+                  src={img.url}
+                  alt={`Get Gutters fleet ${i + 1}`}
+                  className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
+                />
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FREQUENTLY ASKED QUESTIONS */}
+      <section id="faq" className="border-t border-border/60 py-20 lg:py-28">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="text-xs uppercase tracking-[0.3em] text-primary">Helpful Answers</div>
+            <h2 className="mt-3 font-display text-4xl font-bold sm:text-5xl">
+              Common gutter <span className="text-gold-gradient">questions.</span>
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Clear answers about services, estimates, service areas, and planning the right work
+              for the property.
+            </p>
+          </div>
+          <div className="mt-12 space-y-4">
+            {homepageFaqs.map((item) => (
+              <details
+                key={item.question}
+                className="group rounded-2xl border border-border bg-card px-6 py-5 transition open:border-primary/50 open:shadow-gold"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-semibold">
+                  <span>{item.question}</span>
+                  <span
+                    className="text-2xl font-light text-primary transition group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="mt-4 max-w-3xl text-sm leading-7 text-muted-foreground">
+                  {item.answer}
+                </p>
+              </details>
             ))}
           </div>
         </div>
@@ -438,8 +621,8 @@ function Index() {
                   Ready for gutters <span className="text-gold-gradient">done right?</span>
                 </h2>
                 <p className="mt-4 text-muted-foreground">
-                  Call Pablo today for a no-pressure walkthrough and a free
-                  written estimate. Most estimates scheduled within 24 hours.
+                  Call Pablo today for a no-pressure walkthrough and a free written estimate. Most
+                  estimates scheduled within 24 hours.
                 </p>
                 <div className="mt-8 flex flex-col items-start gap-3">
                   <Link
@@ -474,16 +657,17 @@ function Index() {
                   <Clock className="mt-0.5 h-5 w-5 text-primary" />
                   <div>
                     <div className="font-semibold">Hours</div>
-                    <div className="text-muted-foreground">
-                      {HOURS}
-                    </div>
+                    <div className="text-muted-foreground">{HOURS}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 rounded-xl border border-border bg-background/50 p-4">
                   <Phone className="mt-0.5 h-5 w-5 text-primary" />
                   <div>
                     <div className="font-semibold">Phone</div>
-                    <a href={`tel:${PHONE_TEL}`} className="text-muted-foreground hover:text-primary">
+                    <a
+                      href={`tel:${PHONE_TEL}`}
+                      className="text-muted-foreground hover:text-primary"
+                    >
                       {PHONE}
                     </a>
                   </div>
@@ -499,7 +683,11 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-12 sm:px-6 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
-              <img src={logo.url} alt="Get Gutters" className="h-12 w-12 rounded-md object-contain" />
+              <img
+                src={logo.url}
+                alt="Get Gutters"
+                className="h-12 w-12 rounded-md object-contain"
+              />
               <div>
                 <div className="font-display text-xl font-bold">
                   GET <span className="text-gold-gradient">GUTTERS</span>
@@ -510,14 +698,24 @@ function Index() {
               </div>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
-              Family-owned seamless gutter specialists serving Orange Park,
-              Jacksonville, and all of Northeast Florida.
+              Family-owned seamless gutter specialists serving Orange Park, Jacksonville, and all of
+              Northeast Florida.
             </p>
             <div className="mt-5 flex gap-3">
-              <a href="https://www.facebook.com/getguttersjax" target="_blank" rel="noreferrer" className="rounded-full border border-border p-2 text-muted-foreground hover:border-primary hover:text-primary">
+              <a
+                href="https://www.facebook.com/getguttersjax"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-border p-2 text-muted-foreground hover:border-primary hover:text-primary"
+              >
                 <Facebook className="h-4 w-4" />
               </a>
-              <a href="https://www.instagram.com/getguttersjax/" target="_blank" rel="noreferrer" className="rounded-full border border-border p-2 text-muted-foreground hover:border-primary hover:text-primary">
+              <a
+                href="https://www.instagram.com/getguttersjax/"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-border p-2 text-muted-foreground hover:border-primary hover:text-primary"
+              >
                 <Instagram className="h-4 w-4" />
               </a>
             </div>
@@ -525,21 +723,55 @@ function Index() {
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-primary">Services</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/services/seamless-gutter-installation" className="hover:text-primary">Seamless 6&quot; K-Style Installation</Link></li>
-              <li><Link to="/services/gutter-cleaning" className="hover:text-primary">Gutter Cleaning</Link></li>
-              <li><Link to="/services/gutter-guards" className="hover:text-primary">Gutter Guards</Link></li>
-              <li><Link to="/services/gutter-repair" className="hover:text-primary">Gutter Repair</Link></li>
-              <li><Link to="/services/fascia-soffit" className="hover:text-primary">Fascia &amp; Soffit</Link></li>
-              <li><Link to="/services/commercial-gutters" className="hover:text-primary">Commercial Gutters</Link></li>
-              <li><Link to="/services/downspout-installation" className="hover:text-primary">Downspout Installation</Link></li>
+              <li>
+                <Link to="/services/seamless-gutter-installation" className="hover:text-primary">
+                  Seamless 6&quot; K-Style Installation
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/gutter-cleaning" className="hover:text-primary">
+                  Gutter Cleaning
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/gutter-guards" className="hover:text-primary">
+                  Gutter Guards
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/gutter-repair" className="hover:text-primary">
+                  Gutter Repair
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/fascia-soffit" className="hover:text-primary">
+                  Fascia &amp; Soffit
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/commercial-gutters" className="hover:text-primary">
+                  Commercial Gutters
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/downspout-installation" className="hover:text-primary">
+                  Downspout Installation
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
             <div className="text-xs uppercase tracking-[0.25em] text-primary">Contact</div>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {PHONE}</li>
-              <li className="flex items-center gap-2"><MapPin className="h-4 w-4 shrink-0 text-primary" /> {ADDRESS}</li>
-              <li className="flex items-center gap-2"><Clock className="h-4 w-4 shrink-0 text-primary" /> {HOURS}</li>
+              <li className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-primary" /> {PHONE}
+              </li>
+              <li className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 shrink-0 text-primary" /> {ADDRESS}
+              </li>
+              <li className="flex items-center gap-2">
+                <Clock className="h-4 w-4 shrink-0 text-primary" /> {HOURS}
+              </li>
             </ul>
           </div>
         </div>
