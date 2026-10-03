@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePage, type ServicePageContent } from "@/components/ServicePage";
-import work6 from "@/assets/work-6.jpeg.asset.json";
+import { siteImages } from "@/lib/site-images";
 
 const url = "https://getguttersjax.com/services/downspout-installation";
 const title = "Downspout Installation | Get Gutters Northeast Florida";
@@ -66,7 +66,10 @@ const content: ServicePageContent = {
   title: "Downspout Installation",
   intro:
     "Get Gutters plans and installs downspouts around the amount of roof runoff, the gutter layout, the building, and the available drainage path so water can be directed away from sensitive areas.",
-  imageUrl: work6.url,
+  imageUrl: siteImages.work6.src,
+  imageSrcSet: siteImages.work6.srcSet,
+  imageWidth: siteImages.work6.width,
+  imageHeight: siteImages.work6.height,
   imageAlt: "Custom downspout routing installed by Get Gutters",
   overviewTitle: "Complete the path from roof to discharge",
   overview: [

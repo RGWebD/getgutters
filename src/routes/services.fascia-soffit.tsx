@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePage, type ServicePageContent } from "@/components/ServicePage";
-import fasciaInstall from "@/assets/fascia-install.jpeg.asset.json";
+import { siteImages } from "@/lib/site-images";
 
 const url = "https://getguttersjax.com/services/fascia-soffit";
 const title = "Fascia & Soffit Installation | Get Gutters Northeast Florida";
@@ -66,7 +66,10 @@ const content: ServicePageContent = {
   title: "Fascia & Soffit Installation",
   intro:
     "Get Gutters installs aluminum fascia wrap and soffit components as part of a clean, functional roofline built to support the gutter system and manage exposed areas beneath the roof edge.",
-  imageUrl: fasciaInstall.url,
+  imageUrl: siteImages.fasciaInstall.src,
+  imageSrcSet: siteImages.fasciaInstall.srcSet,
+  imageWidth: siteImages.fasciaInstall.width,
+  imageHeight: siteImages.fasciaInstall.height,
   imageAlt: "Fascia and soffit installation completed by Get Gutters",
   overviewTitle: "Roofline work that supports the gutter system",
   overview: [

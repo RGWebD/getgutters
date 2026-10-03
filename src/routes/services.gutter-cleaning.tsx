@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePage, type ServicePageContent } from "@/components/ServicePage";
-import work2 from "@/assets/work-2.jpeg.asset.json";
+import { siteImages } from "@/lib/site-images";
 
 const url = "https://getguttersjax.com/services/gutter-cleaning";
 const title = "Gutter Cleaning | Get Gutters Orange Park & Jacksonville FL";
@@ -66,7 +66,10 @@ const content: ServicePageContent = {
   title: "Gutter Cleaning",
   intro:
     "Get Gutters removes leaves, pine needles, and other debris, then flushes and inspects the system so you can better understand how water is moving through the gutters and downspouts.",
-  imageUrl: work2.url,
+  imageUrl: siteImages.work2.src,
+  imageSrcSet: siteImages.work2.srcSet,
+  imageWidth: siteImages.work2.width,
+  imageHeight: siteImages.work2.height,
   imageAlt: "Wrap-around seamless gutter system installed by Get Gutters",
   overviewTitle: "Remove the buildup that slows water flow",
   overview: [

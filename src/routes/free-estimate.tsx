@@ -3,6 +3,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { Mail, Phone, CheckCircle2, ArrowLeft } from "lucide-react";
 import { submitEstimateRequest } from "@/lib/estimate.functions";
+import { trackEvent } from "@/lib/analytics";
 
 export const Route = createFileRoute("/free-estimate")({
   head: () => ({
@@ -25,9 +26,7 @@ export const Route = createFileRoute("/free-estimate")({
           "Request a free, no-pressure gutter estimate from Get Gutters — Northeast Florida's seamless gutter experts.",
       },
     ],
-    links: [
-      { rel: "canonical", href: "https://getguttersjax.com/free-estimate" },
-    ],
+    links: [{ rel: "canonical", href: "https://getguttersjax.com/free-estimate" }],
   }),
   component: FreeEstimatePage,
 });
@@ -43,12 +42,7 @@ const schema = z.object({
     .min(7, "Please enter a valid phone number")
     .max(20)
     .regex(/^[0-9()+\-\s.]+$/, "Please enter a valid phone number"),
-  email: z
-    .string()
-    .trim()
-    .email("Please enter a valid email address")
-    .max(255)
-    .or(z.literal("")),
+  email: z.string().trim().email("Please enter a valid email address").max(255).or(z.literal("")),
   service: z.string().max(100),
   message: z
     .string()
@@ -58,7 +52,7 @@ const schema = z.object({
 });
 
 const SERVICES = [
-  "6\" Seamless Gutter Installation",
+  '6" Seamless Gutter Installation',
   "Gutter Cleaning",
   "Gutter Guards",
   "Fascia & Soffit",
@@ -75,16 +69,14 @@ function FreeEstimatePage() {
     message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
-    "idle"
-  );
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  const set = (k: keyof typeof form) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setForm((f) => ({ ...f, [k]: e.target.value }));
-    setErrors((er) => ({ ...er, [k]: "" }));
-  };
+  const set =
+    (k: keyof typeof form) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      setForm((f) => ({ ...f, [k]: e.target.value }));
+      setErrors((er) => ({ ...er, [k]: "" }));
+    };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,6 +100,11 @@ function FreeEstimatePage() {
           message: parsed.data.message,
         },
       });
+      trackEvent("generate_lead", {
+        method: "estimate_form",
+        service: parsed.data.service,
+        page_path: "/free-estimate",
+      });
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -124,16 +121,13 @@ function FreeEstimatePage() {
           <ArrowLeft className="h-4 w-4" /> Back to Get Gutters
         </Link>
 
-        <div className="mt-6 text-xs uppercase tracking-[0.3em] text-primary">
-          Free Estimate
-        </div>
+        <div className="mt-6 text-xs uppercase tracking-[0.3em] text-primary">Free Estimate</div>
         <h1 className="mt-3 font-display text-4xl font-bold sm:text-5xl">
           Tell us about <span className="text-gold-gradient">your project.</span>
         </h1>
         <p className="mt-4 text-muted-foreground">
-          Fill out the form below and Pablo will get back to you with a free,
-          no-pressure estimate — most requests answered within 24 hours. Prefer
-          to talk? Call{" "}
+          Fill out the form below and Pablo will get back to you with a free, no-pressure estimate —
+          most requests answered within 24 hours. Prefer to talk? Call{" "}
           <a href={`tel:${PHONE_TEL}`} className="text-primary underline">
             {PHONE}
           </a>
@@ -143,12 +137,9 @@ function FreeEstimatePage() {
         {status === "sent" ? (
           <div className="mt-10 rounded-2xl border border-primary/40 bg-card p-8 text-center shadow-gold">
             <CheckCircle2 className="mx-auto h-12 w-12 text-primary" />
-            <h2 className="mt-4 font-display text-2xl font-semibold">
-              Request received!
-            </h2>
+            <h2 className="mt-4 font-display text-2xl font-semibold">Request received!</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Thanks, {form.name.split(" ")[0]} — we'll be in touch shortly. If
-              it's urgent, call{" "}
+              Thanks, {form.name.split(" ")[0]} — we'll be in touch shortly. If it's urgent, call{" "}
               <a href={`tel:${PHONE_TEL}`} className="text-primary underline">
                 {PHONE}
               </a>
@@ -216,8 +207,7 @@ function FreeEstimatePage() {
 
             {status === "error" && (
               <p className="text-sm text-red-400">
-                Something went wrong sending your request — please try again or
-                call {PHONE}.
+                Something went wrong sending your request — please try again or call {PHONE}.
               </p>
             )}
 

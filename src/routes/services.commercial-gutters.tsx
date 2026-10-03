@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicePage, type ServicePageContent } from "@/components/ServicePage";
-import work5 from "@/assets/work-5.jpeg.asset.json";
+import { siteImages } from "@/lib/site-images";
 
 const url = "https://getguttersjax.com/services/commercial-gutters";
 const title = "Commercial Gutters | Get Gutters Jacksonville & Orange Park FL";
@@ -66,7 +66,10 @@ const content: ServicePageContent = {
   title: "Commercial Gutter Systems",
   intro:
     "Get Gutters plans commercial gutter and downspout systems around the roofline, runoff, access, and drainage needs of storefronts, warehouses, and multi-unit properties in Northeast Florida.",
-  imageUrl: work5.url,
+  imageUrl: siteImages.work5.src,
+  imageSrcSet: siteImages.work5.srcSet,
+  imageWidth: siteImages.work5.width,
+  imageHeight: siteImages.work5.height,
   imageAlt: "Full-perimeter gutter installation completed by Get Gutters",
   overviewTitle: "Plan the system around the property",
   overview: [

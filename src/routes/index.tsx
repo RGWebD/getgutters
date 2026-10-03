@@ -1,19 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.jpeg.asset.json";
-import truckTrailer from "@/assets/truck-trailer.jpeg.asset.json";
-import truckGate from "@/assets/truck-gate.jpeg.asset.json";
-import gutterMachine from "@/assets/gutter-machine.jpeg.asset.json";
-import fasciaInstall from "@/assets/fascia-install.jpeg.asset.json";
-import rgwebdLogo from "@/assets/rgwebd-logo.jpeg.asset.json";
-import heroTruck from "@/assets/hero-truck.jpeg.asset.json";
-import work1 from "@/assets/work-1.jpeg.asset.json";
-import work2 from "@/assets/work-2.jpeg.asset.json";
-import work3 from "@/assets/work-3.jpeg.asset.json";
-import work4 from "@/assets/work-4.jpeg.asset.json";
-import work5 from "@/assets/work-5.jpeg.asset.json";
-import work6 from "@/assets/work-6.jpeg.asset.json";
-import work7 from "@/assets/work-7.jpeg.asset.json";
-import work8 from "@/assets/work-8.jpeg.asset.json";
+import { OptimizedImage } from "@/components/OptimizedImage";
+import { siteImages } from "@/lib/site-images";
 import {
   Phone,
   MapPin,
@@ -57,6 +44,10 @@ export const Route = createFileRoute("/")({
         content:
           "Family-owned seamless gutter experts serving Jacksonville, Orange Park and Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
       },
+      { property: "og:image", content: "https://getguttersjax.com/images/get-gutters-social.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:image", content: "https://getguttersjax.com/images/get-gutters-social.jpg" },
     ],
     links: [{ rel: "canonical", href: "https://getguttersjax.com/" }],
     scripts: [
@@ -240,8 +231,9 @@ function Index() {
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-lg">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
           <a href="#top" className="flex items-center gap-3">
-            <img
-              src={logo.url}
+            <OptimizedImage
+              image={siteImages.getGuttersLogo}
+              sizes="44px"
               alt="Get Gutters logo"
               className="h-11 w-11 rounded-md object-contain"
             />
@@ -297,19 +289,14 @@ function Index() {
 
       {/* HERO */}
       <section id="top" className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{
-            backgroundImage: `url(${heroTruck.url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <img
-          src={work1.url}
+        <OptimizedImage
+          image={siteImages.heroTruck}
           alt=""
           aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-55 mix-blend-overlay"
+          sizes="100vw"
+          loading="eager"
+          fetchPriority="high"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-45"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
         <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:py-32">
@@ -369,8 +356,10 @@ function Index() {
           </div>
           <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-primary/30 shadow-luxe">
-              <img
-                src={truckGate.url}
+              <OptimizedImage
+                image={siteImages.truckGate}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                loading="eager"
                 alt="Get Gutters truck and trailer"
                 className="h-full w-full object-cover"
               />
@@ -404,38 +393,19 @@ function Index() {
             </p>
           </div>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((s) => {
-              const card = (
-                <>
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition group-hover:bg-gold-gradient group-hover:text-primary-foreground">
-                    <s.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="font-display text-xl font-semibold">{s.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
-                </>
-              );
-
-              if ("to" in s && s.to) {
-                return (
-                  <Link
-                    key={s.title}
-                    to={s.to}
-                    className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    {card}
-                  </Link>
-                );
-              }
-
-              return (
-                <div
-                  key={s.title}
-                  className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold"
-                >
-                  {card}
+            {services.map((s) => (
+              <Link
+                key={s.title}
+                to={s.to}
+                className="group rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition group-hover:bg-gold-gradient group-hover:text-primary-foreground">
+                  <s.icon className="h-6 w-6" />
                 </div>
-              );
-            })}
+                <h3 className="font-display text-xl font-semibold">{s.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -445,13 +415,15 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
           <div className="order-2 lg:order-1">
             <div className="grid gap-4 sm:grid-cols-2">
-              <img
-                src={gutterMachine.url}
+              <OptimizedImage
+                image={siteImages.gutterMachine}
+                sizes="(min-width: 1024px) 25vw, 50vw"
                 alt="Seamless K-style gutter machine"
                 className="rounded-2xl border border-primary/30 object-cover shadow-luxe"
               />
-              <img
-                src={fasciaInstall.url}
+              <OptimizedImage
+                image={siteImages.fasciaInstall}
+                sizes="(min-width: 1024px) 25vw, 50vw"
                 alt="Fascia installation"
                 className="rounded-2xl border border-primary/30 object-cover shadow-luxe"
               />
@@ -528,26 +500,26 @@ function Index() {
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { img: work1, label: "Oversized downspouts · entryway" },
-              { img: work3, label: "Seamless white K-style · corner miter" },
-              { img: work5, label: "Full perimeter install · modern stucco" },
-              { img: work6, label: "Custom downspout routing · patio side" },
-              { img: work8, label: "Matte black gutters · coastal home" },
-              { img: work4, label: "Bronze fascia detail · new construction" },
-              { img: work7, label: "Black seamless · brick estate" },
-              { img: work2, label: "Wrap-around seamless · rear elevation" },
-              { img: fasciaInstall, label: "Fascia rebuild · precision fit" },
+              { img: siteImages.work1, label: "Oversized downspouts · entryway" },
+              { img: siteImages.work3, label: "Seamless white K-style · corner miter" },
+              { img: siteImages.work5, label: "Full perimeter install · modern stucco" },
+              { img: siteImages.work6, label: "Custom downspout routing · patio side" },
+              { img: siteImages.work8, label: "Matte black gutters · coastal home" },
+              { img: siteImages.work4, label: "Bronze fascia detail · new construction" },
+              { img: siteImages.work7, label: "Black seamless · brick estate" },
+              { img: siteImages.work2, label: "Wrap-around seamless · rear elevation" },
+              { img: siteImages.fasciaInstall, label: "Fascia rebuild · precision fit" },
             ].map((item, i) => (
               <figure
                 key={i}
                 className="group overflow-hidden rounded-2xl border border-border shadow-luxe transition hover:border-primary/60 hover:shadow-gold"
               >
                 <div className="aspect-[4/5] overflow-hidden">
-                  <img
-                    src={item.img.url}
+                  <OptimizedImage
+                    image={item.img}
                     alt={item.label}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                    loading="lazy"
                   />
                 </div>
                 <figcaption className="border-t border-border/60 bg-background/70 px-4 py-3 text-xs uppercase tracking-wider text-muted-foreground">
@@ -557,18 +529,21 @@ function Index() {
             ))}
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {[truckTrailer, truckGate, gutterMachine].map((img, i) => (
-              <div
-                key={i}
-                className="group overflow-hidden rounded-2xl border border-primary/30 shadow-luxe"
-              >
-                <img
-                  src={img.url}
-                  alt={`Get Gutters fleet ${i + 1}`}
-                  className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
-                />
-              </div>
-            ))}
+            {[siteImages.truckTrailer, siteImages.truckGate, siteImages.gutterMachine].map(
+              (img, i) => (
+                <div
+                  key={i}
+                  className="group overflow-hidden rounded-2xl border border-primary/30 shadow-luxe"
+                >
+                  <OptimizedImage
+                    image={img}
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    alt={`Get Gutters fleet ${i + 1}`}
+                    className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+              ),
+            )}
           </div>
         </div>
       </section>
@@ -683,8 +658,9 @@ function Index() {
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-12 sm:px-6 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
-              <img
-                src={logo.url}
+              <OptimizedImage
+                image={siteImages.getGuttersLogo}
+                sizes="48px"
                 alt="Get Gutters"
                 className="h-12 w-12 rounded-md object-contain"
               />
@@ -792,7 +768,12 @@ function Index() {
             {Array.from({ length: 2 }).flatMap((_, group) =>
               Array.from({ length: 6 }).map((_, i) => (
                 <div key={`${group}-${i}`} className="mx-8 flex items-center gap-3 text-sm">
-                  <img src={rgwebdLogo.url} alt="RGWebD" className="h-7 w-auto rounded" />
+                  <OptimizedImage
+                    image={siteImages.rgwebdLogo}
+                    sizes="112px"
+                    alt="RGWebD"
+                    className="h-7 w-auto rounded"
+                  />
                   <span className="text-muted-foreground">Powered by</span>
                   <span className="text-gold-gradient font-semibold tracking-wide">
                     RGWebD — Reese Gets You Ranked
