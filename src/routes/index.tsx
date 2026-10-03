@@ -322,7 +322,7 @@ function Index() {
                 to="/free-estimate"
                 className="inline-flex items-center gap-2 rounded-full bg-gold-gradient px-7 py-3.5 font-semibold text-primary-foreground shadow-gold transition hover:brightness-110"
               >
-                <Mail className="h-4 w-4" /> Get Free Estimate — Email Us
+                <Mail className="h-4 w-4" /> Get Free Estimate
               </Link>
               <a
                 href={`sms:${PHONE_TEL}`}
@@ -621,7 +621,7 @@ function Index() {
                     to="/free-estimate"
                     className="inline-flex items-center gap-3 rounded-full bg-gold-gradient px-8 py-4 text-lg font-semibold text-primary-foreground shadow-gold transition hover:brightness-110"
                   >
-                    <Mail className="h-5 w-5" /> Get Free Estimate — Email Us
+                    <Mail className="h-5 w-5" /> Get Free Estimate
                   </Link>
                   <a
                     href={`tel:${PHONE_TEL}`}
