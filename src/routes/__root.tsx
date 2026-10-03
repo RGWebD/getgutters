@@ -8,11 +8,11 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useMemo, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { trackPageView } from "../lib/analytics";
+import { trackEvent, trackPageView } from "../lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -36,12 +36,16 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
+function ErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
+  const normalizedError = useMemo(
+    () => (error instanceof Error ? error : new Error(String(error))),
+    [error],
+  );
+  console.error(normalizedError);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
+    reportLovableError(normalizedError, { boundary: "tanstack_root_error_component" });
+  }, [normalizedError]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -80,14 +84,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "google-site-verification", content: "Tp5ErYRGN-cf46XHxIpYWHQAcKsyVrd9E3MlzRxJSsk" },
-      { title: "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL" },
+      {
+        title:
+          "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL",
+      },
       {
         name: "description",
         content:
           "Family-owned seamless gutter experts serving Jacksonville, Orange Park and Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
       },
       { name: "author", content: "Get Gutters" },
-      { property: "og:title", content: "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL" },
+      {
+        property: "og:title",
+        content:
+          "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL",
+      },
       {
         property: "og:description",
         content:
@@ -95,10 +106,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL" },
-      { name: "twitter:description", content: "Family-owned seamless gutter experts serving Jacksonville, Orange Park and Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/62239d74-ab12-4c2e-ba30-9af8311b1c67/id-preview-1313515f--850abd2c-4bae-40a4-adb6-a08055fc1945.lovable.app-1784845106591.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/62239d74-ab12-4c2e-ba30-9af8311b1c67/id-preview-1313515f--850abd2c-4bae-40a4-adb6-a08055fc1945.lovable.app-1784845106591.png" },
+      {
+        name: "twitter:title",
+        content:
+          "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Family-owned seamless gutter experts serving Jacksonville, Orange Park and Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
+      },
+      { property: "og:image", content: "https://getguttersjax.com/images/get-gutters-social.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:image", content: "https://getguttersjax.com/images/get-gutters-social.jpg" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -138,6 +159,33 @@ function RootComponent() {
   useEffect(() => {
     trackPageView(pathname);
   }, [pathname]);
+
+  useEffect(() => {
+    const trackLeadClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest<HTMLAnchorElement>("a[href]");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href") || "";
+      const common = {
+        link_url: href,
+        link_text: (anchor.textContent || "").trim().slice(0, 100),
+        page_path: window.location.pathname,
+      };
+
+      if (href.startsWith("tel:")) {
+        trackEvent("click_to_call", common);
+      } else if (href.startsWith("sms:")) {
+        trackEvent("click_to_text", common);
+      } else if (href === "/free-estimate" || href.endsWith("/free-estimate")) {
+        trackEvent("estimate_cta_click", common);
+      }
+    };
+
+    document.addEventListener("click", trackLeadClick);
+    return () => document.removeEventListener("click", trackLeadClick);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
