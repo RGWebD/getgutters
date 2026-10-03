@@ -90,7 +90,7 @@ export const Route = createFileRoute("/")({
           ],
           areaServed: serviceAreas.map((area) => ({
             "@type": "AdministrativeArea",
-            name: `${area}, Florida`,
+            name: `${area.name}, Florida`,
           })),
           sameAs: [
             "https://www.facebook.com/getguttersjax",
@@ -181,18 +181,21 @@ const services = [
 ];
 
 const serviceAreas = [
-  "Orange Park",
-  "Jacksonville",
-  "Fleming Island",
-  "Middleburg",
-  "Mandarin",
-  "San Marco",
-  "Avondale",
-  "Riverside",
-  "Ortega",
-  "Green Cove Springs",
-  "Oakleaf Plantation",
-];
+  { name: "Orange Park", to: "/areas/orange-park" },
+  { name: "Oakleaf Plantation", to: "/areas/oakleaf-plantation" },
+  { name: "Lakeside", to: "/areas/lakeside" },
+  { name: "Fleming Island", to: "/areas/fleming-island" },
+  { name: "Argyle Forest", to: "/areas/argyle-forest" },
+  { name: "Mandarin", to: "/areas/mandarin" },
+  { name: "Middleburg", to: "/areas/middleburg" },
+  { name: "Fruit Cove", to: "/areas/fruit-cove" },
+  { name: "Jacksonville", to: null },
+  { name: "San Marco", to: null },
+  { name: "Avondale", to: null },
+  { name: "Riverside", to: null },
+  { name: "Ortega", to: null },
+  { name: "Green Cove Springs", to: null },
+] as const;
 
 const homepageFaqs = [
   {
@@ -213,7 +216,7 @@ const homepageFaqs = [
   {
     question: "What areas does Get Gutters serve?",
     answer:
-      "Get Gutters serves Orange Park, Jacksonville, Fleming Island, Middleburg, Mandarin, San Marco, Avondale, Riverside, Ortega, Green Cove Springs, Oakleaf Plantation, and nearby Northeast Florida communities.",
+      "Get Gutters serves Orange Park, Oakleaf Plantation, Lakeside, Fleming Island, Argyle Forest, Mandarin, Middleburg, Fruit Cove, Jacksonville, San Marco, Avondale, Riverside, Ortega, Green Cove Springs, and nearby Northeast Florida communities.",
   },
   {
     question: "How do I know whether my gutters need repair or replacement?",
@@ -470,15 +473,35 @@ function Index() {
             </p>
           </div>
           <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {serviceAreas.map((area) => (
-              <div
-                key={area}
-                className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm transition hover:border-primary/60 hover:bg-primary/5"
-              >
-                <MapPin className="h-4 w-4 shrink-0 text-primary" />
-                <span>{area}, FL</span>
-              </div>
-            ))}
+            {serviceAreas.map((area) => {
+              const content = (
+                <>
+                  <span className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4 shrink-0 text-primary" />
+                    <span>{area.name}, FL</span>
+                  </span>
+                  {area.to && <ArrowRight className="h-4 w-4 shrink-0 text-primary" />}
+                </>
+              );
+
+              return area.to ? (
+                <a
+                  key={area.name}
+                  href={area.to}
+                  aria-label={`View gutter services in ${area.name}, Florida`}
+                  className="flex items-center justify-between gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm transition hover:border-primary/60 hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {content}
+                </a>
+              ) : (
+                <div
+                  key={area.name}
+                  className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm"
+                >
+                  {content}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -497,11 +520,12 @@ function Index() {
             </p>
             <div className="mx-auto mt-8 max-w-2xl rounded-2xl border border-primary/30 bg-card/60 p-6 text-left">
               <div className="font-display text-lg font-semibold">
-                Recent projects in <span className="text-gold-gradient">Orange Park &amp; Jacksonville</span>
+                Recent projects in{" "}
+                <span className="text-gold-gradient">Orange Park &amp; Jacksonville</span>
               </div>
               <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
                 {[
-                  "Full-perimeter seamless 6\" K-style installs on homes in Orange Park and Jacksonville",
+                  'Full-perimeter seamless 6" K-style installs on homes in Orange Park and Jacksonville',
                   "Oversized downspouts and custom drainage routing at entryways and patios",
                   "Matte black and white seamless systems with precision corner miters",
                   "Fascia and soffit rebuilds paired with new gutter runs",

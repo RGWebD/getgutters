@@ -9,7 +9,7 @@ BUSINESS FACTS (only use these — never invent prices, warranties, certificatio
 - Free, no-pressure estimates. Online form: https://getguttersjax.com/free-estimate
 - Services: seamless gutter installation (6-inch K-style aluminum only, formed on-site with a commercial gutter machine), gutter guards & leaf protection (micro-mesh and reverse-curve), gutter cleaning (hand-cleaned, flushed, inspected, debris hauled away), gutter repair (sagging sections, leaking miters, loose hangers, downspout damage), fascia & soffit installation (aluminum fascia wrap and soffit), commercial gutter systems, downspout installation (oversized downspouts, underground drainage routing).
 - NOT offered: 5-inch or 7-inch gutters, copper gutters, fencing of any kind.
-- Service areas: Orange Park, Jacksonville, Fleming Island, Middleburg, Mandarin, San Marco, Avondale, Riverside, Ortega, Green Cove Springs, Oakleaf Plantation. Beach communities are NOT served.
+- Service areas: Orange Park, Jacksonville, Fleming Island, Middleburg, Mandarin, San Marco, Avondale, Riverside, Ortega, Green Cove Springs, Oakleaf Plantation, Lakeside, Argyle Forest, and Fruit Cove. Beach communities are NOT served.
 - Pablo works from a 2025 Ram 3500 Cummins truck with the gutter machine on a trailer.
 - Northeast Florida context: heavy summer storms, oak leaves and pine needles clog gutters, good drainage protects foundations and landscaping.
 
