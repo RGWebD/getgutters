@@ -9,8 +9,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { supabase } from "@/integrations/supabase/client";
-import { getGscData, type GscResult } from "@/lib/gsc.functions";
+import { getAdminDashboardData } from "@/lib/admin.functions";
+import type { GscResult } from "@/lib/gsc.functions";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -21,8 +21,6 @@ export const Route = createFileRoute("/admin")({
   }),
   component: AdminPage,
 });
-
-const PASSCODE = "gutters2025";
 
 type Row = {
   path: string;
@@ -48,27 +46,19 @@ const METRICS: { key: MetricKey; label: string; format: (v: number) => string }[
 ];
 
 function AdminPage() {
-  const [unlocked, setUnlocked] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.sessionStorage.getItem("gg-estimator") === "1"
-  );
+  const [accessCode, setAccessCode] = useState<string | null>(null);
   const [code, setCode] = useState("");
   const [error, setError] = useState(false);
 
-  if (!unlocked) {
+  if (!accessCode) {
     return (
       <div className="min-h-screen bg-[#070b14] flex items-center justify-center px-4">
         <form
           className="w-full max-w-sm text-center space-y-4"
           onSubmit={(e) => {
             e.preventDefault();
-            if (code === PASSCODE) {
-              window.sessionStorage.setItem("gg-estimator", "1");
-              setUnlocked(true);
-            } else {
-              setError(true);
-            }
+            setError(false);
+            setAccessCode(code);
           }}
         >
           <p className="font-display text-2xl text-[#e4c36a] tracking-wide">
@@ -97,7 +87,16 @@ function AdminPage() {
     );
   }
 
-  return <Dashboard />;
+  return (
+    <Dashboard
+      accessCode={accessCode}
+      onUnauthorized={() => {
+        setAccessCode(null);
+        setCode("");
+        setError(true);
+      }}
+    />
+  );
 }
 
 type EstimateRequest = {
@@ -110,7 +109,13 @@ type EstimateRequest = {
   created_at: string;
 };
 
-function Dashboard() {
+function Dashboard({
+  accessCode,
+  onUnauthorized,
+}: {
+  accessCode: string;
+  onUnauthorized: () => void;
+}) {
   const [rows, setRows] = useState<Row[] | null>(null);
   const [requests, setRequests] = useState<EstimateRequest[] | null>(null);
   const [days, setDays] = useState(30);
@@ -119,31 +124,23 @@ function Dashboard() {
 
   useEffect(() => {
     let active = true;
-    const since = new Date(Date.now() - days * 86400000).toISOString();
-    supabase
-      .from("page_views")
-      .select("path, referrer, user_agent, visitor_id, created_at")
-      .gte("created_at", since)
-      .order("created_at", { ascending: false })
-      .limit(10000)
-      .then(({ data }) => {
-        if (active) setRows((data as Row[]) ?? []);
+    setRows(null);
+    setRequests(null);
+    setGsc(null);
+    getAdminDashboardData({ data: { accessCode, days } })
+      .then((data) => {
+        if (!active) return;
+        setRows((data.rows as Row[]) ?? []);
+        setRequests((data.requests as EstimateRequest[]) ?? []);
+        setGsc(data.gsc);
+      })
+      .catch(() => {
+        if (active) onUnauthorized();
       });
-    supabase
-      .from("estimate_requests")
-      .select("id, name, phone, email, service, message, created_at")
-      .order("created_at", { ascending: false })
-      .limit(200)
-      .then(({ data }) => {
-        if (active) setRequests((data as EstimateRequest[]) ?? []);
-      });
-    getGscData().then((data) => {
-      if (active) setGsc(data);
-    });
     return () => {
       active = false;
     };
-  }, [days]);
+  }, [accessCode, days, onUnauthorized]);
 
   const stats = useMemo(() => {
     const list = rows ?? [];

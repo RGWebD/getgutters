@@ -1,7 +1,6 @@
-import { createServerFn } from "@tanstack/react-start";
-
 // Server-only: reads LOVABLE_API_KEY and GOOGLE_SEARCH_CONSOLE_API_KEY.
-// Never import from client components directly — always go through this fn.
+// Never import this module from client components. It is loaded dynamically by
+// the authenticated admin server function.
 
 const GATEWAY = "https://connector-gateway.lovable.dev/google_search_console";
 const SITE_URL = "https://getguttersjax.com/";
@@ -48,7 +47,7 @@ export type GscResult = {
   error?: string;
 };
 
-export const getGscData = createServerFn({ method: "GET" }).handler(async () => {
+export async function fetchGscData(): Promise<GscResult> {
   const lovableApiKey = process.env["LOVABLE_API_KEY"];
   const connectionApiKey = process.env["GOOGLE_SEARCH_CONSOLE_API_KEY"];
 
@@ -229,4 +228,4 @@ export const getGscData = createServerFn({ method: "GET" }).handler(async () => 
   }
 
   return result;
-});
+}
