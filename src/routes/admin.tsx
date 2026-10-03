@@ -106,7 +106,15 @@ type EstimateRequest = {
   email: string | null;
   service: string | null;
   message: string;
+  source?: string;
   created_at: string;
+};
+
+type ChatLog = {
+  id: string;
+  lead_captured: boolean;
+  updated_at: string;
+  lines: { role: string; text: string }[];
 };
 
 function Dashboard({
@@ -121,6 +129,7 @@ function Dashboard({
   const [days, setDays] = useState(30);
   const [metric, setMetric] = useState<MetricKey>("visitors");
   const [gsc, setGsc] = useState<GscResult | null>(null);
+  const [chats, setChats] = useState<ChatLog[] | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -133,6 +142,7 @@ function Dashboard({
         setRows((data.rows as Row[]) ?? []);
         setRequests((data.requests as EstimateRequest[]) ?? []);
         setGsc(data.gsc);
+        setChats(data.chats ?? []);
       })
       .catch(() => {
         if (active) onUnauthorized();
@@ -392,10 +402,54 @@ function Dashboard({
                         {r.service && (
                           <span className="text-[#9aa6b8]">{r.service}</span>
                         )}
+                        {r.source === "chat" && (
+                          <span className="rounded-full bg-[#e4c36a]/20 px-2 text-xs text-[#e4c36a]">
+                            via chat
+                          </span>
+                        )}
                       </div>
                       <p className="mt-2 whitespace-pre-wrap text-[#cdd6e4]">
                         {r.message}
                       </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Panel>
+
+            {/* AI chat conversations */}
+            <Panel title={`Chat Conversations${chats ? ` (${chats.length})` : ""}`}>
+              {chats === null ? (
+                <p className="text-sm text-[#9aa6b8]">Loading…</p>
+              ) : chats.length === 0 ? (
+                <p className="text-sm text-[#9aa6b8]">No chats yet.</p>
+              ) : (
+                <ul className="space-y-2">
+                  {chats.map((c) => (
+                    <li key={c.id} className="rounded-md border border-[#e4c36a]/15 bg-[#070b14] text-sm">
+                      <details>
+                        <summary className="flex cursor-pointer flex-wrap items-center justify-between gap-2 p-3">
+                          <span className="text-[#cdd6e4]">
+                            {c.lines.find((l) => l.role === "user")?.text.slice(0, 80) || "Chat"}
+                          </span>
+                          <span className="flex items-center gap-2 text-xs text-[#9aa6b8]">
+                            {c.lead_captured && (
+                              <span className="rounded-full bg-green-500/20 px-2 text-green-400">Lead captured</span>
+                            )}
+                            {new Date(c.updated_at).toLocaleString()}
+                          </span>
+                        </summary>
+                        <div className="space-y-2 border-t border-[#e4c36a]/15 p-3">
+                          {c.lines.map((l, i) => (
+                            <p key={i} className="whitespace-pre-wrap text-[#cdd6e4]">
+                              <span className={l.role === "user" ? "font-semibold text-[#e4c36a]" : "font-semibold text-[#9aa6b8]"}>
+                                {l.role === "user" ? "Visitor: " : "Assistant: "}
+                              </span>
+                              {l.text}
+                            </p>
+                          ))}
+                        </div>
+                      </details>
                     </li>
                   ))}
                 </ul>
