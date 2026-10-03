@@ -1,3 +1,4 @@
+import { ChatWidget } from "@/components/ChatWidget";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -156,6 +157,11 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  const showChat =
+    hydrated && !/^\/(admin|estimate|estimator|database)(\/|$)/.test(pathname);
+
   useEffect(() => {
     trackPageView(pathname);
   }, [pathname]);
@@ -191,6 +197,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {showChat && <ChatWidget />}
     </QueryClientProvider>
   );
 }

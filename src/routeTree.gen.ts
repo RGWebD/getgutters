@@ -22,6 +22,7 @@ import { Route as ServicesGutterCleaningRouteImport } from './routes/services.gu
 import { Route as ServicesFasciaSoffitRouteImport } from './routes/services.fascia-soffit'
 import { Route as ServicesDownspoutInstallationRouteImport } from './routes/services.downspout-installation'
 import { Route as ServicesCommercialGuttersRouteImport } from './routes/services.commercial-gutters'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const FreeEstimateRoute = FreeEstimateRouteImport.update({
@@ -92,6 +93,11 @@ const ServicesCommercialGuttersRoute =
     path: '/services/commercial-gutters',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
   '/free-estimate': typeof FreeEstimateRoute
+  '/api/chat': typeof ApiChatRoute
   '/services/commercial-gutters': typeof ServicesCommercialGuttersRoute
   '/services/downspout-installation': typeof ServicesDownspoutInstallationRoute
   '/services/fascia-soffit': typeof ServicesFasciaSoffitRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
   '/free-estimate': typeof FreeEstimateRoute
+  '/api/chat': typeof ApiChatRoute
   '/services/commercial-gutters': typeof ServicesCommercialGuttersRoute
   '/services/downspout-installation': typeof ServicesDownspoutInstallationRoute
   '/services/fascia-soffit': typeof ServicesFasciaSoffitRoute
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/estimate': typeof EstimateRoute
   '/estimator': typeof EstimatorRoute
   '/free-estimate': typeof FreeEstimateRoute
+  '/api/chat': typeof ApiChatRoute
   '/services/commercial-gutters': typeof ServicesCommercialGuttersRoute
   '/services/downspout-installation': typeof ServicesDownspoutInstallationRoute
   '/services/fascia-soffit': typeof ServicesFasciaSoffitRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/estimate'
     | '/estimator'
     | '/free-estimate'
+    | '/api/chat'
     | '/services/commercial-gutters'
     | '/services/downspout-installation'
     | '/services/fascia-soffit'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/estimate'
     | '/estimator'
     | '/free-estimate'
+    | '/api/chat'
     | '/services/commercial-gutters'
     | '/services/downspout-installation'
     | '/services/fascia-soffit'
@@ -189,6 +200,7 @@ export interface FileRouteTypes {
     | '/estimate'
     | '/estimator'
     | '/free-estimate'
+    | '/api/chat'
     | '/services/commercial-gutters'
     | '/services/downspout-installation'
     | '/services/fascia-soffit'
@@ -206,6 +218,7 @@ export interface RootRouteChildren {
   EstimateRoute: typeof EstimateRoute
   EstimatorRoute: typeof EstimatorRoute
   FreeEstimateRoute: typeof FreeEstimateRoute
+  ApiChatRoute: typeof ApiChatRoute
   ServicesCommercialGuttersRoute: typeof ServicesCommercialGuttersRoute
   ServicesDownspoutInstallationRoute: typeof ServicesDownspoutInstallationRoute
   ServicesFasciaSoffitRoute: typeof ServicesFasciaSoffitRoute
@@ -309,6 +322,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCommercialGuttersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/preview': {
       id: '/lovable/email/transactional/preview'
       path: '/lovable/email/transactional/preview'
@@ -326,6 +346,7 @@ const rootRouteChildren: RootRouteChildren = {
   EstimateRoute: EstimateRoute,
   EstimatorRoute: EstimatorRoute,
   FreeEstimateRoute: FreeEstimateRoute,
+  ApiChatRoute: ApiChatRoute,
   ServicesCommercialGuttersRoute: ServicesCommercialGuttersRoute,
   ServicesDownspoutInstallationRoute: ServicesDownspoutInstallationRoute,
   ServicesFasciaSoffitRoute: ServicesFasciaSoffitRoute,

@@ -33,7 +33,7 @@ export const getAdminDashboardData = createServerFn({ method: "POST" })
     ]);
 
     const since = new Date(Date.now() - data.days * 86400000).toISOString();
-    const [pageViewsResult, requestsResult, gsc] = await Promise.all([
+    const [pageViewsResult, requestsResult, chatsResult, gsc] = await Promise.all([
       supabaseAdmin
         .from("page_views")
         .select("path, referrer, user_agent, visitor_id, created_at")
@@ -42,9 +42,14 @@ export const getAdminDashboardData = createServerFn({ method: "POST" })
         .limit(10000),
       supabaseAdmin
         .from("estimate_requests")
-        .select("id, name, phone, email, service, message, created_at")
+        .select("id, name, phone, email, service, message, source, created_at")
         .order("created_at", { ascending: false })
         .limit(200),
+      supabaseAdmin
+        .from("chat_conversations")
+        .select("id, messages, lead_captured, updated_at")
+        .order("updated_at", { ascending: false })
+        .limit(100),
       fetchGscData(),
     ]);
 
@@ -59,6 +64,17 @@ export const getAdminDashboardData = createServerFn({ method: "POST" })
     return {
       rows: pageViewsResult.data ?? [],
       requests: requestsResult.data ?? [],
+      chats: (chatsResult.data ?? []).map((c) => ({
+        id: c.id as string,
+        lead_captured: c.lead_captured as boolean,
+        updated_at: c.updated_at as string,
+        lines: ((c.messages as Array<{ role: string; parts?: Array<{ type: string; text?: string }> }>) ?? [])
+          .map((m) => ({
+            role: m.role,
+            text: (m.parts ?? []).filter((p) => p.type === "text").map((p) => p.text ?? "").join("\n"),
+          }))
+          .filter((l) => l.text),
+      })),
       gsc,
     };
   });
