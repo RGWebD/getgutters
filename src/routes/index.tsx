@@ -26,23 +26,21 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title:
-          "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL",
+        title: "Gutter Installation & Repair Jacksonville FL | Get Gutters",
       },
       {
         name: "description",
         content:
-          "Family-owned seamless gutter experts serving Jacksonville, Orange Park and Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
+          "Family-owned seamless gutter pros in Orange Park serving Jacksonville FL — 6-inch gutters fabricated on-site. Free estimates: call or text (904) 589-0000.",
       },
       {
         property: "og:title",
-        content:
-          "Get Gutters | Seamless Gutter Installation, Repair & Cleaning — Jacksonville & Orange Park FL",
+        content: "Gutter Installation & Repair Jacksonville FL | Get Gutters",
       },
       {
         property: "og:description",
         content:
-          "Family-owned seamless gutter experts serving Jacksonville, Orange Park and Northeast Florida communities. 5-star rated. Free estimates: (904) 589-0000.",
+          "Family-owned seamless gutter pros in Orange Park serving Jacksonville FL — 6-inch gutters fabricated on-site. Free estimates: call or text (904) 589-0000.",
       },
       { property: "og:image", content: "https://getguttersjax.com/images/get-gutters-social.jpg" },
       { property: "og:image:width", content: "1200" },
@@ -494,9 +492,28 @@ function Index() {
               Craftsmanship you can <span className="text-gold-gradient">see.</span>
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Real installs across Northeast Florida — seamless K-style runs, custom downspouts,
-              precision miters, and clean fascia lines on every project.
+              Real installs across Orange Park and Jacksonville — every run fabricated on-site from
+              a single continuous piece of 6-inch aluminum.
             </p>
+            <div className="mx-auto mt-8 max-w-2xl rounded-2xl border border-primary/30 bg-card/60 p-6 text-left">
+              <div className="font-display text-lg font-semibold">
+                Recent projects in <span className="text-gold-gradient">Orange Park &amp; Jacksonville</span>
+              </div>
+              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                {[
+                  "Full-perimeter seamless 6\" K-style installs on homes in Orange Park and Jacksonville",
+                  "Oversized downspouts and custom drainage routing at entryways and patios",
+                  "Matte black and white seamless systems with precision corner miters",
+                  "Fascia and soffit rebuilds paired with new gutter runs",
+                  "Gutter guard retrofits keeping pine needles and storm debris out",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
