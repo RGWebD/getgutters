@@ -17,8 +17,8 @@ export const getAdminDashboardData = createServerFn({ method: "POST" })
       throw new Error("Private dashboard access is not configured.");
     }
 
-    const suppliedHash = createHash("sha256").update(data.accessCode).digest();
-    const expectedHash = createHash("sha256").update(adminAccessCode).digest();
+    const suppliedHash = createHash("sha256").update(data.accessCode.trim()).digest();
+    const expectedHash = createHash("sha256").update(adminAccessCode.trim()).digest();
 
     if (
       suppliedHash.length !== expectedHash.length ||
