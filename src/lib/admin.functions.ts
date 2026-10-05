@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 const schema = z.object({
-  accessCode: z.string().min(12).max(128),
+  accessCode: z.string().min(1).max(128),
   days: z.union([z.literal(7), z.literal(30), z.literal(90)]),
 });
 
